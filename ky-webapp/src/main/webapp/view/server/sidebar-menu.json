@@ -1,6 +1,6 @@
 [
   {
-    "text": "视频管理",
+    "text": "SP管理",
     "sref": "#",
     "icon": "dtdream dtdream-operlog",
     "hide": false,
@@ -15,14 +15,14 @@
         "translate": ""
       },
       {
-        "text": "人脸识别",
+        "text": "RL识别",
         "sref": "app.keyPerson-recognition",
         "hide": false,
         "permission": "VIDEO_RESULT",
         "translate": ""
       },
       {
-        "text": "字词识别",
+        "text": "ZC识别",
         "sref": "app.keyword-recognition",
         "hide": false,
         "permission": "VIDEO_RESULT",
@@ -31,7 +31,7 @@
     ]
   },
   {
-    "text": "信息注册",
+    "text": "XX注册",
     "sref": "#",
     "icon": "dtdream dtdream-dashboard",
     "hide": false,
@@ -39,14 +39,14 @@
     "translate": "",
     "submenu": [
       {
-        "text": "关键词管理",
+        "text": "GJC管理",
         "sref": "app.keyword-manage",
         "hide": false,
         "permission": "MSG_REGISTER",
         "translate": ""
       },
       {
-        "text": "关键人管理",
+        "text": "GJR管理",
         "sref": "app.key-person",
         "hide": false,
         "permission": "MSG_REGISTER",
@@ -101,7 +101,7 @@
         "translate": ""
       },
       {
-        "text": "采集服务管理",
+        "text": "CJFW管理",
         "sref": "app.collection-service",
         "hide": false,
         "permission": "SYSTEM_CONFIG",

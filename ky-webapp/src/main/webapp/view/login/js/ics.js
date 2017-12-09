@@ -3,7 +3,8 @@
  */
 'use strict';
 var Ics ={
-    project: '/ics-manage',
+    name:'KY',
+    project: '/ky',
     loginHome:'/view/login/login.html',
     index:'/view/index.html',
     wsPort:'7080',
@@ -77,7 +78,7 @@ var Ics ={
         return this.project + this.index;
     },
     getFoot:function(){
-        return "© 2017-2017 韩家川 版权所有。 保留一切权利。";
+        return "© 2017-2017 YL版权所有。 保留一切权利。";
     },
     doProhibit:function(){
         if (window.Event)

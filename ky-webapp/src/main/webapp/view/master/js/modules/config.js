@@ -38,25 +38,25 @@ App.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'RouteH
             })
             .state('app.keyword-recognition', {
                 url: '/keyword-recognition',
-                title: '关键词分析',
+                title: 'GJC分析',
                 templateUrl: helper.basepath('keyword-recognition.html'),
                 resolve: helper.resolveFor('ngTable', 'ngTableExport', 'datatables', 'datatables-pugins', 'ngDialog', 'ui.select', 'classyloader', 'blockUI', 'jquery-dt-submenu', 'toaster')
             })
             .state('app.keyPerson-recognition', {
                 url: '/keyPerson-recognition',
-                title: '关键人分析',
+                title: 'GJR分析',
                 templateUrl: helper.basepath('keyPerson-recognition.html'),
                 resolve: helper.resolveFor('ngTable', 'ngTableExport', 'datatables', 'datatables-pugins', 'ngDialog', 'ui.select', 'classyloader', 'blockUI', 'jquery-dt-submenu', 'toaster')
             })
             .state('app.keyword-manage', {
                 url: '/keyword-manage',
-                title: '关键词管理',
+                title: 'GJC管理',
                 templateUrl: helper.basepath('key-word.html'),
                 resolve: helper.resolveFor('ngTable', 'ngTableExport', 'datatables', 'datatables-pugins', 'ngDialog', 'ui.select', 'classyloader', 'blockUI', 'jquery-dt-submenu', 'toaster')
             })
             .state('app.key-person', {
                 url: '/key-person',
-                title: '关键人管理',
+                title: 'GJR管理',
                 templateUrl: helper.basepath('key-person.html'),
                 resolve: helper.resolveFor('ngTable', 'ngTableExport', 'datatables', 'datatables-pugins', 'ngDialog', 'ui.select', 'classyloader', 'blockUI', 'jquery-dt-submenu', 'toaster')
             })
@@ -128,20 +128,20 @@ App.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'RouteH
             })
             .state('app.collection-service', {
                 url: '/collection-service',
-                title: '采集服务管理',
+                title: 'CJFW管理',
                 templateUrl: helper.basepath('collection-service.html'),
                 resolve: helper.resolveFor('ngTable', 'ngTableExport', 'datatables', 'datatables-pugins', 'ngDialog', 'ui.select', 'classyloader', 'blockUI', 'jquery-dt-submenu', 'toaster')
             })
             .state('app.channel-manage', {
                 url: '/channel-manage?hostId?hostName',
-                title: '频道管理',
+                title: 'PD管理',
                 templateUrl: helper.basepath('channel-manage.html'),
                 resolve: helper.resolveFor('ngTable', 'ngTableExport', 'datatables', 'datatables-pugins', 'ngDialog', 'ui.select', 'classyloader', 'blockUI', 'jquery-dt-submenu', 'toaster'),
                 controller: 'channelManageCtrl'
             })
             .state('app.video-keyword', {
                 url: '/video-keyword?keywordId?videoId?keywordName',
-                title: '关键词分析详情',
+                title: 'GJC分析详情',
                 templateUrl: helper.basepath('video-keyword.html'),
                 controller: 'vedioKeywordCtrl',
                 resolve: helper.resolveFor('ngTable', 'ngTableExport', 'datatables', 'datatables-pugins', 'ngDialog', 'ui.select', 'classyloader', 'blockUI', 'jquery-dt-submenu', 'toaster')
@@ -149,7 +149,7 @@ App.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'RouteH
             })
             .state('app.test', {
                 url: '/test',
-                title: '关键词分析详情',
+                title: 'GJC分析详情',
                 templateUrl: helper.basepath('test.html'),
                 controller: 'testCtrl',
                 resolve: helper.resolveFor('ngTable', 'ngTableExport', 'datatables', 'datatables-pugins', 'ngDialog', 'ui.select', 'classyloader', 'blockUI', 'jquery-dt-submenu', 'toaster')
@@ -157,7 +157,7 @@ App.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 'RouteH
             })
             .state('app.video-keyPerson', {
                 url: '/video-keyPerson?personId?videoId?personName',
-                title: '关键人分析详情',
+                title: 'GJR分析详情',
                 templateUrl: helper.basepath('video-keyPerson.html'),
                 controller: 'vedioKeyPersonCtrl',
                 resolve: helper.resolveFor('ngTable', 'ngTableExport', 'datatables', 'datatables-pugins', 'ngDialog', 'ui.select', 'classyloader', 'blockUI', 'jquery-dt-submenu', 'toaster')

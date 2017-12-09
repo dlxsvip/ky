@@ -12,8 +12,8 @@ if (typeof $ === 'undefined') { throw new Error('This application\'s JavaScript 
 
 // APP START
 // ----------------------------------- 
-
-var App = angular.module('ICS', [
+var model = Ics.name;
+var App = angular.module(model, [
     'ngRoute',
     'ngAnimate',
     'ngStorage',
@@ -79,7 +79,7 @@ App.run(["$rootScope", "$state", "$stateParams", '$window', '$templateCache', '$
     // Scope Globals
     // ----------------------------------- 
     $rootScope.app = {
-      name: 'ICS',
+      name: model,
       description: 'Angular Bootstrap Admin Template',
       year: ((new Date()).getFullYear()),
       layout: {

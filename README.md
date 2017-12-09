@@ -11,3 +11,7 @@ ky-webapp\src\main\webapp\view\master>gulp
 
 
 
+启动 web 容器
+访问http://localhost:8080/ky
+初始zh/** admin/admin
+
