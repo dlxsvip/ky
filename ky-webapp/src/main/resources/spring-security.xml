@@ -63,7 +63,7 @@
 
 
     <!--在这个类中，你就可以从数据库中读入用户的密码，角色信息，是否锁定，账号是否过期等 -->
-    <bean id="myUserDetailService" class="com.dtdream.ics.security.UserDetailsServiceImpl"/>
+    <bean id="myUserDetailService" class="com.ky.logic.security.UserDetailsServiceImpl"/>
 
 
     <!-- BCrypt算法 -->
@@ -85,7 +85,7 @@
     </bean>
 
     <bean id="icsUsernamePasswordAuthenticationFilter"
-          class="com.dtdream.ics.security.IcsUsernamePasswordAuthenticationFilter">
+          class="com.ky.logic.security.IcsUsernamePasswordAuthenticationFilter">
         <property name="authenticationManager" ref="authenticationManager"/>
         <!--配置拦截的url-->
         <property name="filterProcessesUrl" value="/security_check" />
@@ -93,7 +93,7 @@
         <property name="authenticationSuccessHandler" ref="icsAuthenticationSuccessHandler"/>
     </bean>
 
-    <bean id="icsAuthenticationFailureHandler" class="com.dtdream.ics.security.IcsAuthenticationFailureHandler"></bean>
-    <bean id="icsAuthenticationSuccessHandler" class="com.dtdream.ics.security.IcsAuthenticationSuccessHandler"></bean>
+    <bean id="icsAuthenticationFailureHandler" class="com.ky.logic.security.IcsAuthenticationFailureHandler"></bean>
+    <bean id="icsAuthenticationSuccessHandler" class="com.ky.logic.security.IcsAuthenticationSuccessHandler"></bean>
 </beans>
 

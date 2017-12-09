@@ -23,7 +23,7 @@
 
 
     <!-- 启动自动扫描该包下所有的Bean(例如@Controller) -->
-    <context:component-scan base-package="com.dtdream.ics.*"/>
+    <context:component-scan base-package="com.ky.logic.*"/>
 
     <!--任务注解-->
     <task:annotation-driven/>
@@ -68,9 +68,9 @@
         <property name="exceptionMappings">
             <props>
                 <!--login 控制层-->
-                <!--<prop key="com.dtdream.ics.common.exception.SessionTimeoutException">redirect:/control/login/loginHome</prop>-->
+                <!--<prop key="com.ky.logic.common.exception.SessionTimeoutException">redirect:/control/login/loginHome</prop>-->
                 <!--login 登录页面-->
-                <prop key="com.dtdream.ics.common.exception.SessionTimeoutException">${view.login.page}</prop>
+                <prop key="com.ky.logic.common.exception.SessionTimeoutException">${view.login.page}</prop>
             </props>
         </property>
     </bean>
@@ -86,13 +86,13 @@
     </tx:advice>
     <aop:config>
         <aop:advisor advice-ref="txAdvice"
-                     pointcut="execution(* org.snaker.engine.core.*.*(..)) or execution(* com.dtdream.ics.*.service.*.*(..)) "/>
+                     pointcut="execution(* org.snaker.engine.core.*.*(..)) or execution(* com.ky.logic.*.service.*.*(..)) "/>
     </aop:config>
 
     <mvc:annotation-driven>
         <mvc:message-converters>
             <!-- 避免执行AJAX时,返回JSON出现下载文件 -->
-            <bean class="com.dtdream.ics.utils.JsonStringHttpMessageConverter"/>
+            <bean class="com.ky.logic.utils.JsonStringHttpMessageConverter"/>
         </mvc:message-converters>
     </mvc:annotation-driven>
 
@@ -105,7 +105,7 @@
             <!--不需要拦截的路径-->
             <mvc:exclude-mapping path="/login/**"/>
             <mvc:exclude-mapping path="/view/**"/>
-            <bean class="com.dtdream.ics.common.interceptor.MyInterceptor"/>
+            <bean class="com.ky.logic.common.interceptor.MyInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 
