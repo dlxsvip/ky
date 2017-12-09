@@ -1,0 +1,22 @@
+[
+  {
+    "name": "系统管理",
+    "priv": "SYSTEM_CONFIG",
+    "privDes": "系统配置权限。"
+  },
+  {
+    "name": "用户管理",
+    "priv": "USER_CONFIG",
+    "privDes": "用户配置权限。"
+  },
+  {
+    "name": "信息注册",
+    "priv": "MSG_REGISTER",
+    "privDes": "信息注册权限。"
+  },
+  {
+    "name": "视频管理",
+    "priv": "VIDEO_RESULT",
+    "privDes": "视频分析结果查看权限。"
+  }
+]

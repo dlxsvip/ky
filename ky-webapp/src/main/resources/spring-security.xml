@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/security
+                           http://www.springframework.org/schema/security/spring-security.xsd
+       ">
+
+    <import resource="spring-hibernate.xml"/>
+
+    <!--静态资源过滤-->
+    <security:http pattern="/view/**" security="none"></security:http>
+    <security:http pattern="/login/**" security="none"></security:http>
+
+    <!--auto-config="true" 自动配置过滤器，否则 使用自己的过滤器-->
+    <security:http auto-config="false" entry-point-ref="authenticationEntryPoint">
+        <!--禁用CSRF保护功能-->
+        <security:csrf disabled="true"/>
+
+        <!--<security:intercept-url pattern="/control/login/**" access="permitAll"/>-->
+        <!--<security:intercept-url pattern="/control/user/**" access="hasAnyAuthority('USER_CONFIG')"/>
+        <security:intercept-url pattern="/control/keywordAnalysis/**" access="hasAnyAuthority('USER_CONFIG,VIDEO_CONFIG')"/>
+        <security:intercept-url pattern="/control/keyPersonAnalysis/**" access="hasAnyAuthority('USER_CONFIG,VIDEO_CONFIG')"/>
+        -->
+
+
+        <!--过滤器-->
+        <security:custom-filter ref="icsUsernamePasswordAuthenticationFilter" position="FORM_LOGIN_FILTER"/>
+
+        <!--
+        invalidate-session:退出登录后让当前session失效，默认为true
+        logout-success-url:指定成功退出登录后要重定向的URL。需要注意的是对应的URL应当是不需要登录就可以访问的。
+        -->
+        <security:logout
+                invalidate-session="true"
+                logout-url="/loginOut"
+                logout-success-url="${view.login.page}"/>
+
+        <!-- "记住我"功能，采用持久化策略（将用户的登录信息存放在数据库表中）
+        data-source-ref: 指定数据源
+        token-validity-seconds: 表示cookie的有效期（秒为单位），
+        remember-me-parameter: 对应登录页上checkbox的名字。
+        -->
+        <security:remember-me data-source-ref="dataSource" token-validity-seconds="1209600"
+                              remember-me-parameter="rememberMe"/>
+
+        <!--session管理，invalid-session-url指定使用已经超时的sessionId进行请求需要重定向的页面-->
+        <security:session-management invalid-session-url="${view.login.page}">
+            <!-- max-sessions 限制同一用户在应用中同时允许存在的已通过认证的session数量 -->
+            <!-- error-if-maximum-exceeded=false
+                    默认为false，此值表示：用户第二次登录时，前一次的登录信息都被清空。
+                    true 时系统会拒绝第二次登录.
+             -->
+            <security:concurrency-control max-sessions="1" error-if-maximum-exceeded="false"/>
+        </security:session-management>
+
+    </security:http>
+
+
+    <!--在这个类中，你就可以从数据库中读入用户的密码，角色信息，是否锁定，账号是否过期等 -->
+    <bean id="myUserDetailService" class="com.dtdream.ics.security.UserDetailsServiceImpl"/>
+
+
+    <!-- BCrypt算法 -->
+    <bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+        <constructor-arg name="strength" value="10"/>
+    </bean>
+
+    <!--验证配置，认证管理器，实现用户认证的入口，主要实现UserDetailsService接口即可 -->
+    <security:authentication-manager alias="authenticationManager">
+        <security:authentication-provider user-service-ref="myUserDetailService">
+            <security:password-encoder ref="bCryptPasswordEncoder"/>
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+
+    <bean id="authenticationEntryPoint"
+          class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+        <constructor-arg name="loginFormUrl" value="${view.login.page}"/>
+    </bean>
+
+    <bean id="icsUsernamePasswordAuthenticationFilter"
+          class="com.dtdream.ics.security.IcsUsernamePasswordAuthenticationFilter">
+        <property name="authenticationManager" ref="authenticationManager"/>
+        <!--配置拦截的url-->
+        <property name="filterProcessesUrl" value="/security_check" />
+        <property name="authenticationFailureHandler" ref="icsAuthenticationFailureHandler"/>
+        <property name="authenticationSuccessHandler" ref="icsAuthenticationSuccessHandler"/>
+    </bean>
+
+    <bean id="icsAuthenticationFailureHandler" class="com.dtdream.ics.security.IcsAuthenticationFailureHandler"></bean>
+    <bean id="icsAuthenticationSuccessHandler" class="com.dtdream.ics.security.IcsAuthenticationSuccessHandler"></bean>
+</beans>
+
