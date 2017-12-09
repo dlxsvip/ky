@@ -1,0 +1,223 @@
+/* ========================================================================
+   Component: table
+ ========================================================================== */
+body .ng-table th.sortable.sort-desc, body .ng-table th.sortable.sort-asc {
+  background-color: @table-head-bg;
+}
+.table-dtdream {
+  border: 1px solid #ddd;
+  border-top: none;
+  border-bottom: none;
+}
+.tab-content .table-dtdream,.tab-content div[ng-table-pagination] {
+  border: none;
+}
+.table-dtdream > thead > tr > th,.table-dtdream > thead > tr > td {
+  height: 36px;
+  color: #333;
+  font-size: 12px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-bottom: 0px;
+  background: @table-head-bg;
+  font-weight: 200;
+}
+.table-dtdream > tbody > tr > td {
+  height: 40px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  border-top: 0px;
+  color: #333;
+  &:hover {
+    background-color: #F9F9F9;
+  }
+  a{
+    margin-right: 15px;
+  }
+}
+.trActive {
+  background-color: #F9F9F9 !important;
+}
+.table-dtdream > thead > tr > th, .table-dtdream > tbody > tr > td {
+  vertical-align: middle;
+  .c-checkbox {
+    height: 12px;
+    span {
+      width: 12px;
+      height: 12px;
+      background-color: #fff;
+    }
+  }
+}
+.table-dtdream > thead > tr > th.header.sortable:first-child {
+  padding-left: 15px;
+}
+.table-dtdream > tbody > tr > td[sortable]:first-child {
+  padding-left: 15px;
+}
+//table checkbox style
+.table-dtdream {
+  .c-checkbox span, .c-radio span {
+    border-radius: 0;
+    border:1px solid #dadada;
+  }
+  .c-checkbox input[type=checkbox]:checked + span, .c-radio input[type=checkbox]:checked + span, .c-checkbox input[type=radio]:checked + span, .c-radio input[type=radio]:checked + span {
+    border-color: @theme-m-primary;
+    background-color: @theme-m-primary;
+  }
+  .c-checkbox:hover span, .c-radio:hover span {
+    border-color: @theme-m-primary;
+  }
+
+  .c-checkbox span:before, .c-radio span:before {
+    top: -3px;
+  }
+}
+a {
+  color: @theme-m-primary;
+}
+//management icon
+.table-dtdream tbody td .btn-group {
+  cursor: pointer;
+}
+
+//table dropdown-menu style
+.table-dtdream tbody tr td .btn-group {
+  >em {
+    display: block;
+    color: @theme-m-primary;
+    cursor: pointer;
+  }
+  >a {
+    display: block;
+  }
+  >a.management {
+    display: block;
+    .text {
+      display: none;
+    }
+    em {
+      display: inline-block;
+    }
+  }
+}
+.table-dtdream tbody tr td .dropdown-menu {
+  left: auto;
+  right: 0;
+  min-width: 137px;
+  &.animated.fadeInDown > li a:hover {
+    background-color: transparent;
+    color: @theme-m-primary;
+  }
+  li a {
+    padding-left: 26px;
+    font-weight: 200;
+  }
+}
+.table-dtdream tbody .table-nodata-tr .table-nodata-content{
+  font-size: 14px;
+  color:#666;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  em {
+    display: inline-block;
+    font-size: 14px;
+    color:#666;
+    margin-right: 5px;
+  }
+}
+
+div[ng-table-pagination] {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-top: none;
+}
+div[ng-table-pagination]{
+  padding: 15px 15px;
+  .ng-table-pager{
+    .pull-left{
+      button {
+        border:1px solid #dddddd;
+        width:24px !important;
+        height:24px !important;
+        margin-left: 4px !important;
+        color: #333;
+        box-shadow: none;
+        -webkit-box-shadow: none;
+        background-color: #fff;
+      }
+      .text-right span {
+        color: #333;
+        font-size: 12px;
+        font-weight: @font-yahei-light;
+      }
+
+      .btn-pageActive.active, .btn-pageHover:hover {
+        background: @pagination-acitve-bg !important;
+        span {
+          color: #333 !important;
+        }
+      }
+    }
+    .pull-right {
+      .pagination li{
+        &:hover a {
+          background-color: @pagination-acitve-bg !important;
+        }
+        &.active a {
+          background-color: @pagination-acitve-bg !important;
+          span {
+            color: #333 !important;
+          }
+        }
+        > a {
+          padding-top: 0px !important;
+          padding-bottom: 0px !important;
+          width: 24px !important;
+          height: 24px !important;
+          margin-left: 4px;
+          border:1px solid #dddddd;
+          span {
+            font-size: 12px;
+            font-weight: @font-yahei-light;
+            color: #333;
+          }
+        }
+      }
+    }
+  }
+}
+.search-dtdream-row.process{
+  margin-left:12px !important;
+  .add-margin{
+    margin:0 15px !important;
+  }
+}
+.shadow{
+  margin:0;
+  >div{
+    padding:0;
+  }
+}
+.flow-manage{
+  margin:0;
+  padding-top:15px;
+  position: relative;
+  top:-22px;
+  background-color: #fff;
+  border:1px solid #e2e2e2;
+  >div{
+    margin-left:0 !important;
+    margin-right:0 !important;
+  }
+  div:last-child{
+    border:0 ;
+  }
+  table{
+    border-left:0;
+    border-right:0;
+  }
+  .btn{
+    margin-bottom:15px;
+  }
+}

@@ -1,0 +1,33 @@
+.container-fluid(ng-controller="userInfoUpdatePwdCtrl")
+    form.form-horizontal.col-lg-5(name='editPasswordForm',novalidate="")
+        .form-group
+            label.col-lg-3.control-label
+                span 当前密码：
+            .col-lg-9
+                //input.form-control(type='password', name='oldPassword', ng-model="oldPassword", ng-required="true", ng-focus="hide()" ng-blur="checkPassword(oldPassword)")
+                input.form-control(type='password', name='oldPassword', ng-model="oldPassword", ng-required="true")
+                small.text-danger(ng-show="") 请输入正确密码
+                small.text-danger(ng-show="editPasswordForm.oldPassword.$dirty && editPasswordForm.oldPassword.$error.required") 必填项
+        .form-group
+            label.col-lg-3.control-label
+                span 新密码：
+            .col-lg-9
+                input.form-control(type='password', name='newPassword', ng-model="newPassword", ng-required="true", ng-pattern='pwdReg')
+                small.text-danger(ng-show="editPasswordForm.newPassword.$dirty && editPasswordForm.newPassword.$error.required") 必填项
+                small.text-danger(ng-show="editPasswordForm.newPassword.$dirty && editPasswordForm.newPassword.$error.pattern") 格式错误，由数字/字母/特殊符号组成，至少包含两项，长度为8-20位
+
+        .form-group
+            label.col-lg-3.control-label
+                span 确认密码：
+            .col-lg-9
+                input.form-control(type='password', name='newConfirmPassword', ng-model="newConfirmPassword", ng-required="true", ng-pattern='pwdReg')
+                small.text-danger(ng-show="editPasswordForm.newConfirmPassword.$dirty && editPasswordForm.newConfirmPassword.$error.required") 必填项
+                small.text-danger(ng-show="editPasswordForm.newConfirmPassword.$dirty && editPasswordForm.newConfirmPassword.$error.pattern") 格式错误，由数字/字母/特殊符号组成，至少包含两项，长度为8-20位
+                small.text-danger(ng-show="editPasswordForm.newPassword.$dirty && editPasswordForm.newConfirmPassword.$dirty && newPassword != newConfirmPassword") 两次输入的新密码不一致
+
+        .form-group
+                label.col-lg-3.control-label
+                    span &nbsp;
+                .col-lg-9
+                    button.btn.brand-btn-color-a.brand-btn-abandon-focus(type='button', ng-click='updatePassword()' ng-disabled="editPasswordForm.$invalid") 修改
+

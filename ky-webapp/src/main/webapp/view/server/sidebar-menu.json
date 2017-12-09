@@ -1,0 +1,112 @@
+[
+  {
+    "text": "视频管理",
+    "sref": "#",
+    "icon": "dtdream dtdream-operlog",
+    "hide": false,
+    "permission": "VIDEO_RESULT",
+    "translate": "",
+    "submenu": [
+      {
+        "text": "实时告警",
+        "sref": "app.realtime-data",
+        "hide": false,
+        "permission": "VIDEO_RESULT",
+        "translate": ""
+      },
+      {
+        "text": "人脸识别",
+        "sref": "app.keyPerson-recognition",
+        "hide": false,
+        "permission": "VIDEO_RESULT",
+        "translate": ""
+      },
+      {
+        "text": "字词识别",
+        "sref": "app.keyword-recognition",
+        "hide": false,
+        "permission": "VIDEO_RESULT",
+        "translate": ""
+      }
+    ]
+  },
+  {
+    "text": "信息注册",
+    "sref": "#",
+    "icon": "dtdream dtdream-dashboard",
+    "hide": false,
+    "permission": "MSG_REGISTER",
+    "translate": "",
+    "submenu": [
+      {
+        "text": "关键词管理",
+        "sref": "app.keyword-manage",
+        "hide": false,
+        "permission": "MSG_REGISTER",
+        "translate": ""
+      },
+      {
+        "text": "关键人管理",
+        "sref": "app.key-person",
+        "hide": false,
+        "permission": "MSG_REGISTER",
+        "translate": ""
+      }
+    ]
+  },
+  {
+    "text": "用户管理",
+    "sref": "#",
+    "icon": "dtdream dtdream-user-conf",
+    "hide": false,
+    "permission": "USER_CONFIG",
+    "translate": "",
+    "submenu": [
+      {
+        "text": "用户管理",
+        "sref": "app.user-manage",
+        "hide": false,
+        "permission": "USER_CONFIG",
+        "translate": ""
+      },
+      {
+        "text": "角色管理",
+        "sref": "app.role-manage",
+        "hide": false,
+        "permission": "ROLE_CONFIG",
+        "translate": ""
+      },
+      {
+        "text": "权限管理",
+        "sref": "app.role-privilege",
+        "hide": true,
+        "permission": "PRIVILEGE_CONFIG",
+        "translate": ""
+      }
+    ]
+  },
+  {
+    "text": "系统管理",
+    "sref": "#",
+    "icon": "dtdream dtdream-config",
+    "hide": false,
+    "permission": "SYSTEM_CONFIG",
+    "translate": "",
+    "submenu": [
+      {
+        "text": "系统配置",
+        "sref": "app.system-config",
+        "hide": false,
+        "permission": "SYSTEM_CONFIG",
+        "translate": ""
+      },
+      {
+        "text": "采集服务管理",
+        "sref": "app.collection-service",
+        "hide": false,
+        "permission": "SYSTEM_CONFIG",
+        "translate": ""
+      }
+    ]
+  }
+]

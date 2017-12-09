@@ -1,0 +1,13 @@
+meta(charset='utf-8')
+meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+
+meta(name='description', content='{{app.description}}')
+meta(name='keywords', content='app, responsive, angular, bootstrap, dashboard, admin')
+
+title(data-ng-bind="::pageTitle()") ics
+
+link(rel='stylesheet', href='app/css/app.css', data-ng-if="!app.layout.isRTL")
+link(rel='stylesheet', href='app/css/app-rtl.css', data-ng-if="app.layout.isRTL")
+link(rel='stylesheet', ng-href="app/css/{{app.layout.theme}}", data-ng-if="app.layout.theme")
+link(rel='stylesheet', ng-href="{{'themes/'+ app.layout.theme.charAt(app.layout.theme.length-5) + '/dtdream-webfont/css/dtdream-webfont.css'}}")
+link(rel='stylesheet', href='app/css/fontfamily.css', data-ng-if="isMac")

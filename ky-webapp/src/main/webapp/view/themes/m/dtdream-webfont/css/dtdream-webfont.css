@@ -1,0 +1,183 @@
+
+@font-face {font-family: "DtdreamFont";
+  src: url('../fonts/dtdream-webfont.eot?t=1497416743153'); /* IE9*/
+  src: url('../fonts/dtdream-webfont.eot?t=1497416743153#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('../fonts/dtdream-webfont.woff?t=1497416743153') format('woff'), /* chrome, firefox */
+  url('../fonts/dtdream-webfont.ttf?t=1497416743153') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('../fonts/dtdream-webfont.svg?t=1497416743153#DtdreamFont') format('svg'); /* iOS 4.1- */
+}
+
+.dtdream {
+  font-family:"DtdreamFont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.dtdream-goback:before { content: "\e64a"; }
+
+.dtdream-quotaManagement:before { content: "\e66d"; }
+
+.dtdream-resourceOverview:before { content: "\e602"; }
+
+.dtdream-bigdata-yunwei:before { content: "\e607"; }
+
+.dtdream-service:before { content: "\e609"; }
+
+.dtdream-operlog:before { content: "\e60a"; }
+
+.dtdream-apply:before { content: "\e60b"; }
+
+.dtdream-task-center:before { content: "\e60c"; }
+
+.dtdream-projects-manage:before { content: "\e60d"; }
+
+.dtdream-monitor-phy:before { content: "\e60e"; }
+
+.dtdream-monitor:before { content: "\e60f"; }
+
+.dtdream-cloudProductManagement:before { content: "\e614"; }
+
+.dtdream-expire-date:before { content: "\e615"; }
+
+.dtdream-resource-import:before { content: "\e616"; }
+
+.dtdream-bigdata-product-center:before { content: "\e617"; }
+
+.dtdream-undercloud-aliyun:before { content: "\e619"; }
+
+.dtdream-inventory:before { content: "\e61a"; }
+
+.dtdream-resource-phy-detail:before { content: "\e61b"; }
+
+.dtdream-security-console:before { content: "\e61e"; }
+
+.dtdream-config:before { content: "\e621"; }
+
+.dtdream-compute:before { content: "\e622"; }
+
+.dtdream-departments-manage:before { content: "\e625"; }
+
+.dtdream-security-center:before { content: "\e626"; }
+
+.dtdream-alarm:before { content: "\e62b"; }
+
+.dtdream-region:before { content: "\e631"; }
+
+.dtdream-user-conf:before { content: "\e632"; }
+
+.dtdream-role-manage:before { content: "\e633"; }
+
+.dtdream-charge:before { content: "\e645"; }
+
+.dtdream-cloud-rds:before { content: "\e6bf"; }
+
+.dtdream-form-management:before { content: "\e6ad"; }
+
+.dtdream-dashboard:before { content: "\e6ae"; }
+
+.dtdream-database:before { content: "\e6af"; }
+
+.dtdream-backup-recovery:before { content: "\e6b0"; }
+
+.dtdream-safety-control:before { content: "\e6b1"; }
+
+.dtdream-success:before { content: "\e6b2"; }
+
+.dtdream-system-resource-monitor:before { content: "\e6b3"; }
+
+.dtdream-account-management:before { content: "\e6b4"; }
+
+.dtdream-tablespace:before { content: "\e6b5"; }
+
+.dtdream-parameter-management:before { content: "\e6b6"; }
+
+.dtdream-rds:before { content: "\e6b7"; }
+
+.dtdream-parameter-list:before { content: "\e6b8"; }
+
+.dtdream-operation-overview:before { content: "\e6b9"; }
+
+.dtdream-host:before { content: "\e6ba"; }
+
+.dtdream-customer-center:before { content: "\e6bb"; }
+
+.dtdream-shouyeguanli:before { content: "\e6bc"; }
+
+.dtdream-resource-management:before { content: "\e6bd"; }
+
+.dtdream-customer-management:before { content: "\e6be"; }
+
+.dtdream-workOrder-management:before { content: "\e6c0"; }
+
+.dtdream-store:before { content: "\e6c2"; }
+
+.dtdream-cloud-resource-operation:before { content: "\e6c3"; }
+
+.dtdream-dataService:before { content: "\e6c4"; }
+
+.dtdream-bigdata-product:before { content: "\e6c5"; }
+
+.dtdream-bigdata-operation-platform:before { content: "\e6c6"; }
+
+.dtdream-adb-operation-platform:before { content: "\e6c7"; }
+
+.dtdream-login-policy:before { content: "\e6c8"; }
+
+.dtdream-access-control-ram:before { content: "\e6c9"; }
+
+.dtdream-authentication:before { content: "\e6ca"; }
+
+.dtdream-remitting-bill:before { content: "\e6cb"; }
+
+.dtdream-cost:before { content: "\e6cc"; }
+
+.dtdream-message-center:before { content: "\e6ce"; }
+
+.dtdream-cloud-account:before { content: "\e6d1"; }
+
+.dtdream-revenue-expenditure:before { content: "\e6d2"; }
+
+.dtdream-order:before { content: "\e6d3"; }
+
+.dtdream-consumption-overview:before { content: "\e6d4"; }
+
+.dtdream-process-definition:before { content: "\e6d5"; }
+
+.dtdream-cloud-resources:before { content: "\e6d6"; }
+
+.dtdream-proprietary-cloud:before { content: "\e6d7"; }
+
+.dtdream-OSS:before { content: "\e6d8"; }
+
+.dtdream-monitoring-management:before { content: "\e6da"; }
+
+.dtdream-info-circle:before { content: "\e6e0"; }
+
+.dtdream-warning-alarm:before { content: "\e61c"; }
+
+.dtdream-critical-alarm:before { content: "\e61d"; }
+
+.dtdream-info-alarm:before { content: "\e61f"; }
+
+.dtdream-error-alarm:before { content: "\e618"; }
+
+.dtdream-yunshujukuRDS--:before { content: "\e6e1"; }
+
+.dtdream-resource-apply:before { content: "\e623"; }
+
+.dtdream-trash:before { content: "\e627"; }
+
+.dtdream-question-circle:before { content: "\e629"; }
+
+.dtdream-close:before { content: "\e62f"; }
+
+.dtdream-pencil-square:before { content: "\e635"; }
+
+.dtdream-youjian:before { content: "\e637"; }
+
+.dtdream-dingding:before { content: "\e639"; }
+
+.dtdream-plus-square:before { content: "\e63d"; }
+

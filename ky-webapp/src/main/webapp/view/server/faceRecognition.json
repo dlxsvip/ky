@@ -1,0 +1,26 @@
+{
+  "data":{
+    "result": "success",
+    "totalRows":3,
+    "rows":[
+      {
+        "name": "张三",
+        "videoName": "test1.MP4",
+        "startTime": "2017-7-1 11:45:36",
+        "endTime": "2017-7-1 11:45:36"
+      },
+      {
+        "name": "李四",
+        "videoName": "test2.MP4",
+        "startTime": "2017-7-1 11:45:36",
+        "endTime": "2017-7-1 11:45:36"
+      },
+      {
+        "name": "张三",
+        "videoName": "test3.MP4",
+        "startTime": "2017-7-1 11:45:36",
+        "endTime": "2017-7-1 11:45:36"
+      }
+    ]
+  }
+}

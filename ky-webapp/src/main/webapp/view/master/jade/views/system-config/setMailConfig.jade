@@ -1,0 +1,55 @@
+.div(block-ui='blockCreateReciver')
+   .modal-header
+      button.close(type='button', data-dismiss='modal', data-ng-click='close(false)', aria-hidden='true') ×
+      h4.modal-title.ng-binding 邮件通知设置
+   .modal-body.clearfix
+      form.form-horizontal.form-validate(novalidate='novalidate', name='form')
+         .form-group
+            label.col-sm-3.control-label
+               span.text-danger
+               | 昵称:
+            .col-sm-7
+               input.form-control(type='text', ng-model='config.nickName', name='nickName', ng-pattern="/[a-zA-Z0-9]?/")
+               .error.help-block.ng-hide(ng-show='form.nickName.$invalid && form.nickName.$dirty')
+                  small.error.text-danger 请输入正确的邮箱昵称
+         .form-group
+            label.col-sm-3.control-label
+               span.text-danger *
+               | smtp服务器地址:
+            .col-sm-7
+               input.form-control(type='text', ng-model='config.smtpAddress', name='smtpAddress', required='', ng-pattern="/(?:smtp)\\.[\\w-]+\\.(?:com|cn|net|org|gov)(?:\\.(?:cn|jp))?/")
+               .error.help-block.ng-hide(ng-show='form.smtpAddress.$invalid && form.smtpAddress.$dirty')
+                  small.error.text-danger 请输入正确的smtp邮箱服务器地址且不超过36位,如smtp.dtdream.com
+         .form-group
+            label.col-sm-3.control-label
+               span smtp服务器端口:
+            .col-sm-7
+               div(style="display:inline-block;")
+                  label
+                     input(type='radio', name='time', value='25',ng-model='config.smtpPort' ng-checked='true')
+                     | &nbsp25
+               div(style="display:inline-block;margin-left:20px;")
+                  label
+                     input(type='radio', name='time', value='465',ng-model='config.smtpPort')
+                     | &nbsp465
+         .form-group
+            label.col-sm-3.control-label
+               span.text-danger *
+               | 邮箱地址:
+            .col-sm-7
+               input.form-control.ng-pristine.ng-valid.ng-valid-email(type='mail', name='mailAddress', ng-model='config.mailAddress', ng-maxlength="36", ng-pattern="/^(\\w)+((\\-|\\.)*\\w+)@(\\w)+((\\.\\w{2,3}){1,3})$/")
+               .error.help-block.ng-hide(ng-show='form.mailAddress.$invalid && form.mailAddress.$dirty')
+                  small.error.text-danger 请输入正确的邮箱且不超过36位,如mail@example.com
+         .form-group
+            label.col-sm-3.control-label
+               span.text-danger *
+               | 邮箱密码:
+            .col-sm-7
+               input.form-control(name='password', type="password",ng-model='config.mailPassword', ng-maxlength="36", required='')
+         .modal-footer
+            a.btn.btn-primary(data-ng-click='submitForm()', data-ng-disabled='form.$invalid') 确定
+            button.btn.btn-default.ng-binding(data-ng-click='cancel()') 取消
+
+
+
+

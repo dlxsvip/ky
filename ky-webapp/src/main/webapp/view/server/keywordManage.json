@@ -1,0 +1,26 @@
+{
+  "data":{
+    "result": "success",
+    "totalRows":3,
+    "rows":[
+      {
+        "keywordName": "是粉色如果",
+        "description":"张三",
+        "startTime": "2017-7-1 11:45:36",
+        "status": "启用"
+      },
+      {
+        "keywordName": "似的发射点",
+        "description":"张三",
+        "startTime": "2017-7-1 11:45:36",
+        "status": "停止"
+      },
+      {
+        "keywordName": "阿瑟瑞上访人虽然",
+        "description":"张三",
+        "startTime": "2017-7-1 11:45:36",
+        "status": "启用"
+      }
+    ]
+  }
+}

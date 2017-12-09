@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/app.css"/>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/initPwd.css"/>
+    <script src="../vendor/jquery/dist/jquery.min.js"></script>
+    <script src="../vendor/crypto-js/crypto-js.js"></script>
+    <script src="../vendor/crypto-js/aes.js"></script>
+    <script src="js/ics.js"></script>
+    <script src="js/changePwd.js"></script>
+</head>
+<body>
+<div class="container-fluid login">
+    <!--logo-->
+    <!--<div class="col-sm-12 topBar">
+        <div class="col-lg-7 col-sm-12 col-lg-offset-2 logo">
+            <div style="vertical-align:top;">
+                <img src="/cas/images/logo.png">
+            </div>
+        </div>
+    </div>-->
+
+    <div class="changePwd-panel-container ng-scope">
+        <div class="changePwd-panel-header text-center">
+            <h4>修改密码</h4>
+        </div>
+        <div class="box changePwd-panel" id="login">
+            <form id="fm1" name="changePassForm"
+                  class="login-body form-validate form-horizontal ng-pristine ng-invalid ng-invalid-required ng-valid-pattern">
+
+                <div class="form-group">
+                    <div for="password" class="changePasDiv">原始密码</div>
+                    <section>
+                        <input id="password" name="password"
+                               class="form-control ng-pristine ng-invalid ng-invalid-required ng-touched" tabindex="1"
+                               placeholder="请输入原始密码" required="true" type="password" value="" autocomplete="off">
+                    </section>
+                    <div id="error_1" class="text-danger ng-hide" hidden="hidden">原始密码不能为空</div>
+                    <div id="error_7" class="text-danger ng-hide" hidden="true">原始密码无效</div>
+                </div>
+
+                <div class="form-group">
+                    <div for="newPassword" class="changePasDiv">新密码</div>
+                    <section>
+                        <input id="newPassword" name="newPassword"
+                               class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-required ng-valid-pattern"
+                               tabindex="2" pattern="/(?=^.{8,20}$)(?!^\d*$)(?!^[\W_]*$)(?!^[a-zA-Z]*$).*$/"
+                               placeholder="请输入新密码" required="true" type="password" value=""
+                               autocomplete="off" minlength=8 maxlength=20>
+                    </section>
+                    <div id="error_2" class="text-danger ng-hide" hidden="hidden">新密码不能为空</div>
+                    <div id="error_3" class="text-danger ng-hide" hidden="true">格式错误，由数字/字母/特殊符号组成，至少包含两项，长度为8-20位</div>
+                </div>
+
+                <div class="form-group">
+                    <div for="confirmNewPassword" class="changePasDiv">确认新密码</div>
+                    <section>
+                        <input id="confirmNewPassword" name="confirmNewPassword"
+                               class="form-control"
+                               tabindex="3"
+                               placeholder="请再次输入新密码" required="true" type="password" value=""
+                               autocomplete="off" minlength=8 maxlength=20>
+                    </section>
+                    <div id="error_4" class="text-danger ng-hide" hidden="true">新密码不能为空</div>
+                    <div id="error_5" class="text-danger ng-hide" hidden="true">格式错误，由数字/字母/特殊符号组成，至少包含两项，长度为8-20位</div>
+                    <div id="error_6" class="text-danger ng-hide" hidden="true">两次输入的新密码不一致</div>
+
+                </div>
+
+                <br>
+
+                <div class="form-group">
+                    <section class="btn-row">
+                        <input id="changePwd" class="u-btn u-btn-primary form-control" name="submit" accesskey="l" value="修改" tabindex="4" type="button" disabled="disabled" ><!--disabled="disabled"-->
+                    </section>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+
+    <div class="footer-links col-sm-12 text-center" style="font-family:微软雅黑">
+        <p id="foot" class="ng-binding"></p>
+    </div>
+</div>
+
+<script>
+    var url = Ics.getProjectUrl("/view/login/changePwd.html");
+    document.getElementById('changePwd').innerHTML = "请<a href=\"" + url + "\">更改您的密码</a>";
+
+    var foot = Ics.getFoot();
+    document.getElementById('foot').innerText = foot;
+
+</script>
+</body>
+</html>

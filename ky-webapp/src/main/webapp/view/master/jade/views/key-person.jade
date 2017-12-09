@@ -1,0 +1,247 @@
+h3.page-header
+    span 关键人管理
+
+.container-fluid(ng-controller="keyPersonManageCtrl")
+  .row.search-dtdream
+    .col-lg-12
+        .col-lg-7.search-dtdream-row
+            //.col-lg-3.change-ui-select-key
+                ui-select.text-left(ng-model='selected.selected', theme='bootstrap', search-enabled='true', ng-disabled='disabled')
+                    ui-select-match {{$select.selected}}
+                    ui-select-choices(repeat='name in selected.name' ng-click='changeType()')
+                        span(ng-bind-html='name')
+            //.col-lg-3(ng-show='status')
+                ui-select.text-left(ng-model='keyPersonStatus.selected', theme='bootstrap', search-enabled='true', ng-disabled='disabled')
+                    ui-select-match {{$select.selected}}
+                    ui-select-choices(repeat='status in keyPersonStatus.status | filter: $select.search')
+                        span(ng-bind-html='status')
+                        b.fa.fa-check.region-ok-style
+            //.col-lg-4(ng-show='name')
+                input.form-control(type='text', placeholder='请输入{{selected.selected}}', ng-model='selected.searchValue', ng-change='getNullCondition()', ng-keyup='testEnter($event)')
+            .col-lg-6
+                .col-lg-3
+                    label.search-label 关键人名称 :
+                .col-lg-9
+                    input.form-control(type='text', placeholder='请输入关键人名称', ng-model='selected.searchValue', ng-keyup='testEnter($event)')
+            .col-lg-1
+                button.btn.btn-primary(ng-click='searchDetail()') 查询
+        .pull-right
+
+            button.btn.brand-btn-color-a.brand-btn-abandon-focus(type='button', ng-click='addKeyPerson()') 添加
+  .row
+    .col-lg-12
+        table.table.table-dtdream(ng-table='keyPersonManage.tableParams', template-pagination='app/views/ngtable-foot.html', block-ui="keyPersonManageBlockUI" )
+            tbody
+                tr(ng-repeat='item in $data' ng-class= "{ 'trActive': item.selected == true}")
+                    td(data-title="'图像'")
+                        img(ng-src='{{item.personImageAddress}}', style='width: 30px; height: 30px;' tip-img='{{item.personImageAddress}}')
+                    td(data-title="'关键人名称'")
+                        a(ng-click='keyPersonDetailOpen(item)') {{item.personName}}
+                    td(data-title="'描述'")
+                        span {{item.description}}
+                    td(data-title="'注册时间'")
+                        span {{item.createTime}}
+                    td(data-title="'操作'")
+                        a(href='#', ng-click='editKeyPerson(item)') 编辑
+                        a(href='#', ng-click='deleteKeyPerson(item)') 删除
+                tr.table-nodata-tr(ng-if='keyPersonManage.tableParams.data==undefined || keyPersonManage.tableParams.data.length==0')
+                    td(colspan='11')
+                        div.text-center
+                            span.table-nodata-content(ng-show='!isLoading')
+                                em.dtdream.dtdream-info-circle
+                                | 没有符合条件的数据
+script(type="text/ng-template", id='keyPersonDialog')
+    form.form-horizontal(name="keyPersonAddForm", novalidate="")
+        div(block-ui='keyPersonAddBlock')
+            // START modal
+            .modal-header
+                button.close(type='button', data-dismiss='modal', aria-hidden='true', ng-click='cancel()') ×
+                h4.modal-title {{title}}
+            .modal-body
+                .form-group
+                    label.col-lg-3.control-label
+                        span.text-danger *
+                        | 图像
+                    .col-lg-9
+                        input(type='file', id='img', onchange='angular.element(this).scope().remit.readFile(this.files[0], "img")', ng-hide='true')
+                        img(img-select='', ng-src='{{keyPersonInfo.personImageAddress}}', style='width: 250px; height: 250px;', ng-click='triggerFileInput("img")', ng-disabled="isEdit")
+                .form-group
+                    label.col-lg-3.control-label
+                        span.text-danger *
+                        | 关键人名称
+                    .col-lg-9
+                        input.form-control(type='text', name='personName' ,ng-focus="hide()",ng-blur="checkName(keyPersonInfo.personName)", ng-model="keyPersonInfo.personName",placeholder='请输入关键人名称', ng-required="true", ng-disabled="isEdit")
+                        small.text-danger(ng-show="keyPersonAddForm.personName.$dirty && keyPersonAddForm.personName.$error.required") 关键人不能为空
+                        small.text-danger(ng-show="keyPersonAddForm.personName.$dirty && !checkResult") 该关键人名称已存在
+                //.form-group
+                    label.col-lg-3.control-label
+                        span 标签
+                    .col-lg-9
+                        textarea.form-control(type='textarea', name='label', ng-required='false', rows='8', ng-model='keyPersonInfo.label')
+                .form-group
+                    label.col-lg-3.control-label
+                        span 年龄
+                    .col-lg-9
+                        input.form-control(type='number', name='age' ,ng-model="keyPersonInfo.age",placeholder='请输入年龄')
+                .form-group
+                    label.col-lg-3.control-label
+                        span 性别
+                    .col-lg-9
+                        //.radio
+                            label.ng-binding
+                                input.ng-pristine.ng-valid(type='radio', name='sex', ng-model='keyPersonInfo.sex', ng-value='false', ng-checked='true', value='MALE') 男
+                                input.ng-pristine.ng-valid(type='radio', name='sex', ng-model='keyPersonInfo.sex', ng-value='true', value='true') 女
+                        .radio-inline
+                            div.radio-text
+                                input(type="radio" name="sex" ng-model='keyPersonInfo.sex', value='MALE')
+                                label.fontWeight-normal 男
+                        .radio-inline
+                            div.radio-text
+                                input(type='radio', name='sex', ng-model='keyPersonInfo.sex', value='FEMALE')
+                                label.fontWeight-normal 女
+                .form-group
+                    label.col-lg-3.control-label
+                        span 国籍
+                    .col-lg-9
+                        input.form-control(type='text', name='nationality' ,ng-model="keyPersonInfo.nationality",placeholder='请输入国籍')
+                .form-group
+                    label.col-lg-3.control-label
+                        span 地区
+                    .col-lg-9
+                        input.form-control(type='text', name='area' ,ng-model="keyPersonInfo.area",placeholder='请输入地区')
+                .form-group
+                    label.col-lg-3.control-label
+                        span 职位
+                    .col-lg-9
+                        input.form-control(type='text', name='rank' ,ng-model="keyPersonInfo.rank",placeholder='请输入职位')
+                .form-group
+                    label.col-lg-3.control-label
+                        span 描述
+                    .col-lg-9
+                        textarea.form-control(type='textarea', name='description', ng-required='false', rows='8', ng-model='keyPersonInfo.description')
+            .modal-footer
+                button.btn.btn-primary(type='button', ng-click='submitForm()', ng-disabled="keyPersonAddForm.$invalid || !checkResult || !picSelected" ng-if="title=='添加'") 确定
+                button.btn.btn-primary(type='button', ng-click='submitForm()',ng-if="title=='修改'") 确定
+                button.btn.btn-default(type='button', ng-click='cancel()') 取消
+script(type='text/ng-template', id='keyPersonDeleteItem')
+    .div(block-ui="keyPersonDeleteBlock")
+        .modal-header
+            button.close(type='button', data-dismiss='modal', ng-click='cancel()', aria-hidden='true')
+                | ×
+            h4.modal-title.ng-binding 删除
+        .modal-body.clearfix
+            .pull-left.col-padding
+                span.text-size-32.icon-help-2.text-warning
+            .pull-left.col-padding.col-lg-10
+                div
+                    .col-lg-12
+                        span.ng-binding 您所选的关键人将执行删除操作，是否确认删除？
+        .modal-footer
+            button.btn.btn-primary(ng-click='deleteItem()')
+                | 确定
+            button.btn.btn-default(ng-click='cancel()')
+                | 取消
+script(type='text/ng-template', id='keyPersonStartItem')
+    .div(block-ui="keyPersonStartBlock")
+        .modal-header
+            button.close(type='button', data-dismiss='modal', ng-click='cancel()', aria-hidden='true')
+                | ×
+            h4.modal-title.ng-binding 启用
+        .modal-body.clearfix
+            .pull-left.col-padding
+                span.text-size-32.icon-help-2.text-warning
+            .pull-left.col-padding.col-lg-10
+                div
+                    .col-lg-12
+                        span.ng-binding 您所选的关键人将执行启用操作，是否确认启用？
+        .modal-footer
+            button.btn.btn-primary(ng-click='startItem()')
+                | 确定
+            button.btn.btn-default(ng-click='cancel()')
+                | 取消
+script(type='text/ng-template', id='keyPersonStopItem')
+    .div(block-ui="keyPersonStopBlock")
+        .modal-header
+            button.close(type='button', data-dismiss='modal', ng-click='cancel()', aria-hidden='true')
+                | ×
+            h4.modal-title.ng-binding 停止
+        .modal-body.clearfix
+            .pull-left.col-padding
+                span.text-size-32.icon-help-2.text-warning
+            .pull-left.col-padding.col-lg-10
+                div
+                    .col-lg-12
+                        span.ng-binding 您所选的关键人将执行停止操作，是否确认停止？
+        .modal-footer
+            button.btn.btn-primary(ng-click='stopItem()')
+                | 确定
+            button.btn.btn-default(ng-click='cancel()')
+                | 取消
+script(type="text/ng-template", id='keyPersonDetailDialog')
+    form.form-horizontal(name="keyPersonDetailForm", novalidate="")
+        div(block-ui='keyPersonDetailBlockUI')
+            // START modal
+            .modal-header
+                button.close(type='button', data-dismiss='modal', aria-hidden='true', ng-click='cancel()') ×
+                h4.modal-title 详情
+            .modal-body
+                .form-group
+                    label.col-lg-3.control-label
+                        span.text-danger *
+                        | 图像
+                    .col-lg-9
+                        img(ng-src='{{keyPersonInfo.personImageAddress}}', style='width: 250px; height: 250px;')
+                .form-group
+                    label.col-lg-3.control-label
+                        span.text-danger *
+                        | 关键人名称
+                    .col-lg-9
+                        input.form-control(type='text', name='personName', required='', ng-model="keyPersonInfo.personName",placeholder='请输入关键人名称', ng-disabled="isEdit")
+                //.form-group
+                    label.col-lg-3.control-label
+                        span 标签
+                    .col-lg-9
+                        textarea.form-control(type='textarea', name='label', ng-required='false', rows='8', ng-model='keyPersonInfo.label', ng-disabled="isEdit")
+                .form-group
+                    label.col-lg-3.control-label
+                        span 年龄
+                    .col-lg-9
+                        input.form-control(type='number', name='age' ,ng-model="keyPersonInfo.age", ng-disabled="isEdit")
+                .form-group
+                    label.col-lg-3.control-label
+                        span 性别
+                    .col-lg-9
+                        //.radio
+                            label.ng-binding
+                                input.ng-pristine.ng-valid(type='radio', name='sex', ng-model='keyPersonInfo.sex', ng-value='false', ng-checked='true', value='MALE') 男
+                                input.ng-pristine.ng-valid(type='radio', name='sex', ng-model='keyPersonInfo.sex', ng-value='true', value='true') 女
+                        .radio-inline
+                            div.radio-text
+                                input(type="radio" name="sex" ng-model='keyPersonInfo.sex', value='MALE', ng-disabled="isEdit")
+                                label.fontWeight-normal 男
+                        .radio-inline
+                            div.radio-text
+                                input(type='radio', name='sex', ng-model='keyPersonInfo.sex', value='FEMALE', ng-disabled="isEdit")
+                                label.fontWeight-normal 女
+                .form-group
+                    label.col-lg-3.control-label
+                        span 国籍
+                    .col-lg-9
+                        input.form-control(type='text', name='nationality' ,ng-model="keyPersonInfo.nationality", ng-disabled="isEdit")
+                .form-group
+                    label.col-lg-3.control-label
+                        span 地区
+                    .col-lg-9
+                        input.form-control(type='text', name='area' ,ng-model="keyPersonInfo.area", ng-disabled="isEdit")
+                .form-group
+                    label.col-lg-3.control-label
+                        span 职位
+                    .col-lg-9
+                        input.form-control(type='text', name='rank' ,ng-model="keyPersonInfo.rank", ng-disabled="isEdit")
+                .form-group
+                    label.col-lg-3.control-label
+                        span 描述
+                    .col-lg-9
+                        textarea.form-control(type='textarea', name='description', ng-required='false', rows='8', ng-model='keyPersonInfo.description', ng-disabled="isEdit")
+            .modal-footer
+                button.btn.btn-default(type='button', ng-click='cancel()') 确定

@@ -1,0 +1,127 @@
+h3.page-header
+    span 权限管理
+
+.container-fluid(ng-controller="RolePrivilegeCtrl")
+    .row.search-dtdream
+        form(name='searchprivilegeForm')
+            .col-lg-12.search-dtdream-row.ml-0p
+                .col-lg-2
+                    input.form-control(type='text', name='searchPrivilegeName', ng-model='searchPrivilegeName',placeholder='请输入权限名', ng-keyup='searchPrivilegeEnter($event)')
+                .col-lg-1
+                    button.btn.btn-primary(type='button', ng-click='searchPrivilege()') 查询
+                .pull-right(ng-hide='false')
+                    button.btn.brand-btn-color-a(type='button', ng-click='openPrivilegeEditDialog(false)', has-permission='PRIV_SYS_INIT,PRIV_privilege_WRITE') 添加权限
+                    button.btn.btn-danger(type='button', ng-click='',ng-if='false',has-permission='PRIV_SYS_INIT,PRIV_privilege_WRITE') 批量删除
+
+    .row
+        .col-lg-12
+            table.table.table-dtdream(ng-table='privilegeTableParams', template-pagination='app/views/ngtable-foot.html', block-ui="myBlockUIPrivilege")
+                thead
+                    tr
+                        th(check-all='check-all',ng-hide='true')
+                            .checkbox.c-checkbox(data-toggle='tooltip', data-title='Check All')
+                                label
+                                    input(type='checkbox')
+                                    span.fa.fa-check
+                        th 权限名
+                        th 描述
+                        th 类型
+                        th 操作
+                tbody
+                    tr.table-nodata-tr(ng-if='privilegeTableParams.data==undefined || privilegeTableParams.data.length==0')
+                        td(colspan='6')
+                            div.text-center
+                                span.table-nodata-content(ng-show='!isLoading')
+                                    em.dtdream.dtdream-info-circle
+                                    | 没有符合条件的数据
+                    tr(ng-repeat='privilege in $data')
+                        td {{privilege.privilegeName}}
+                        td(style='width:800px')
+                            span(tip-value='{{privilege.description}}', max-len-hidden='60') {{privilege.description}}，
+                        td
+                            span(ng-if='privilege.isDefault') 默认权限
+                            span(ng-if='!privilege.isDefault') 自定义权限
+                        td
+                            .btn-group(dropdown='dropdown', style='vertical-align:top')
+                                em.dtdream.dtdream-form-management(dropdown-toggle='')
+                                ul.dropdown-menu.animated.fadeInDown(privilege='menu')
+                                    li
+                                        a(ng-click='openPrivilegeEditDialog(true, privilege)') 编辑
+                                    li
+                                        a(ng-click='openPrivilegeDelDialog($index)') 删除
+
+script(type="text/ng-template", id='/privilegeConfDialogId.html')
+    form.form-validate.form-horizontal(name="privilegeAddForm")
+        .modal-header
+            button.close(type='button', data-dismiss='modal', aria-hidden='true', ng-click='cancel()')
+            h4.modal-title {{ModalTitle}}
+        .modal-body
+            .form-group
+                label.col-lg-2.control-label
+                    span.text-danger *
+                    | 权限名
+                .col-lg-6
+                    input.form-control(type='text', name='name', required='', ng-model="newPrivilege.name", ng-disabled=" isMotify == true ",placeholder='最多15个字符',ng-pattern='/^[0-9a-zA-Z\\u4e00-\\u9fa5]{1,15}$/')
+                    .error.help-block.ng-hide(ng-show='privilegeAddForm.name.$dirty && privilegeAddForm.name.$invalid')
+                        small.text-danger(ng-if='privilegeAddForm.name.$error.required')
+                            | 权限名不能为空
+                        small.text-danger(ng-if='!privilegeAddForm.name.$error.required && privilegeAddForm.name.$dirty && privilegeAddForm.name.$invalid')
+                            | 必须为中英文或数字,长度不超过15个字符
+            .form-group
+                label.col-lg-2.control-label
+                    span.text-danger *
+                    | 权限
+                .col-lg-6
+                    input.form-control(type='text', name='keyName', required='true', ng-model="newPrivilege.keyName", ng-disabled=" isMotify == true ",placeholder='必须为英文数字和下划线',ng-pattern='/^[0-9a-zA-Z_]*$/')
+                    .error.help-block.ng-hide(ng-show='privilegeAddForm.keyName.$dirty && privilegeAddForm.keyName.$invalid')
+                        small.text-danger(ng-if='privilegeAddForm.keyName.$error.required')
+                            | 权限不能为空
+                        small.text-danger(ng-if='!privilegeAddForm.keyName.$error.required && privilegeAddForm.keyName.$dirty && privilegeAddForm.keyName.$invalid')
+                            | 必须为英文数字或下划线
+            fieldset
+                .form-group
+                    label.col-lg-2.control-label(for='privilegeDescription') 描述
+                    .col-lg-6
+                        textarea#privilegeDescription.form-control(rows='2', name='des',ng-model='newPrivilege.des',placeholder='最多100个字符',ng-pattern='/^[0-9a-zA-Z\\u4e00-\\u9fa5,;.|；，。_\\s]{0,100}$/')
+                        .error.help-block(ng-show='privilegeAddForm.des.$dirty && privilegeAddForm.des.$invalid')
+                            small.text-danger(ng-if='!privilegeAddForm.des.$error.required && privilegeAddForm.des.$dirty && privilegeAddForm.des.$invalid')
+                                | 必须为中英文、数字、逗号、分号、句号、空格、下划线，最多不超过100个字符
+            .form-group(style='overflow: hidden')
+                label.col-lg-2.control-label
+                    span.text-danger *
+                    | 选择频道
+                .col-lg-9.list-group-new
+                    .select-top
+                        .select-lft(style="padding-top:10px;color:#4f5f6f;font-size:14px;") 已选频道个数：
+                            span(style="font-size:13px;",ng-class="{'grey':!num,'green':num}") {{num}}
+                    input.form-control.ng-pristine(type='text', ng-model='searchText', placeholder='输入频道名称', style='border-bottom-right-radius: 0; border-bottom-left-radius: 0; padding-left: 10px; padding-right: 24px;margin-left:-60px;margin-top:12px;width:695px;')
+                    span.fa.fa-search.input-search-icon(style='top: 54px')
+                    .list-group(style='border-top: 0; height: 300px;margin-left:-60px;width:695px;')
+                        table.table.table-dtdream(ng-table='channelTableParams', template-pagination='app/views/ngtable-foot.html', block-ui="blockUIChannel")
+                            thead(style='display:none;')
+                            tbody
+                                tr.table-nodata-tr(ng-if='channelTableParams.data==undefined || channelTableParams.data.length==0')
+                                    td(colspan='6')
+                                        div.text-center
+                                            span.table-nodata-content(ng-show='!isLoading')
+                                                em.dtdream.dtdream-info-circle
+                                                | 没有符合条件的数据
+                                tr(ng-repeat='channel in $data',ng-class="{ 'select': checkSelected(channel)}", ng-click="selectItem(channel)",style='min-height: 40px')
+                                    td {{channel.channelName}}
+                                    td {{channel.hostId}}
+        .modal-footer
+
+            button.btn.btn-primary(type='button', ng-click='submitForm()',data-ng-disabled='privilegeAddForm.$invalid || num == 0') 确定
+            button.btn.btn-default(type='button', ng-click='cancel()') 取消
+
+script(type="text/ng-template", id='/privilegeDelDialog.html')
+    div(block-ui="DelPrivilegeBlockUI")
+        .modal-header
+            button.close(type='button', data-dismiss='modal', aria-hidden='true', ng-click='cancel()') ×
+            h4#myModalLabel.modal-title 删除提示
+        .modal-body
+            p
+                span(ng-model='delprivilege') 确定删除权限: {{delprivilege}}
+        .modal-footer
+            button.btn.btn-primary(type='button', ng-click='submitForm()') 确定
+            button.btn.btn-default(type='button', ng-click='cancel()') 取消

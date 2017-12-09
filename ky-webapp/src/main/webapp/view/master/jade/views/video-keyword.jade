@@ -1,0 +1,40 @@
+h3.page-header
+    span 详情 > {{detail}}
+    a(ng-controller='cloudResourceHeadReturnCtl')
+        button.btn.btn-xs.btn-default(type='button',ng-click='goBack()')
+            em.dtdream.dtdream-goback
+            span 返回
+.row.vedio
+    .col-lg-9
+        .col-lg-2.row
+            piece-time-flash(time-list="timeList", vedio-text='vedioText', vedio-keyword='vedioKeyword', type-request='keyword', video-id='videoId')
+        .col-lg-10.row
+            div
+                video(controls="" width="100%" ng-src="{{remoteAddress | trusted}}" id="keyword")
+                    | 您的浏览器不支持 video 标签
+    .col-lg-3.row.vedioInfo
+            form.form-inline.form-validate
+                .bk-form-row.mv-lg.row
+                    label.control-label.align-left.text-weight-normal.col-lg-3.text-right.fontWeight-normal
+                        span
+                        | 词名：
+                    .col-lg-7
+                        span {{keyword.keywordName}}
+                .bk-form-row.mv-lg.row
+                    label.control-label.align-left.text-weight-normal.col-lg-3.text-right.fontWeight-normal
+                        span
+                        | 标签：
+                    .col-lg-7
+                        span {{keyword.label}}
+                .bk-form-row.mv-lg.row
+                    label.control-label.align-left.text-weight-normal.col-lg-3.text-right.fontWeight-normal
+                        span
+                        | 描述：
+                    .col-lg-7
+                        span {{keyword.description}}
+    .col-lg-12.pt-lg
+        .detail
+            .col-lg-9.vedio-text(ng-bind-html="vedioText")
+            .col-lg-3.vedio-keyword
+                .detail-title.text-center.row 关键词
+                .detail-content.pt-lg.row {{vedioKeyword}}

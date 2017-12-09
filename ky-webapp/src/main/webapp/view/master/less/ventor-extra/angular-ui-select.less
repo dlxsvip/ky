@@ -1,0 +1,136 @@
+//下拉框
+.ui-select-bootstrap > .ui-select-choices{
+  margin-top: 7px;
+  border: none !important;
+  box-shadow:5px 5px 30px 0px rgba(0,0,0,0.15) !important;
+  border-radius:2px;
+  max-height: 202px !important;
+}
+//下拉框上方的三角
+.triangle{
+  position: absolute;
+  z-index: 1000;
+}
+.triangle::after {
+  content: '';
+  display: inline-block;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid white;
+  position: absolute;
+  top: 2px;
+  left: 25px;
+}
+//下拉框中每项的背景颜色
+.ui-select-bootstrap .ui-select-choices-row.active>a{
+  background-color: @brand-dtblue !important;
+}
+.ui-select-bootstrap .ui-select-choices-row>a{
+  padding-top: 7px !important;
+  padding-bottom: 6px !important;
+}
+//将对勾推到右侧
+.ui-select-bootstrap .ui-select-choices-row a>span{
+  display: inline-block;
+  width: 98%;
+}
+.ui-select-bootstrap .ui-select-choices-row a .region-ok-style{
+  overflow: -webkit-paged-x;
+}
+.region-ok-style{
+  color: white !important;
+}
+//调整可选key样式
+//button
+.change-ui-select-key{
+  width: auto;
+  padding-left: 15px;
+  margin-right: 5px;
+}
+.change-ui-select-key .position-left {
+  left: 60px;
+}
+.change-ui-select-key .ui-select-toggle{
+  border: none !important;
+  background-color: @content-bg;
+  font-weight: 700;
+  color: #4f5f6f;
+  text-align: right !important;
+  padding-right: 12px;
+}
+.ui-select-paddright{
+  padding-left: 20px !important;
+}
+//key中的下三角
+.change-ui-select-key .ui-select-bootstrap .ui-select-toggle>.caret{
+  position: absolute !important;
+  right: 0px !important;
+  top: 21px!important;
+}
+.change-ui-select-key .ui-select-toggle:hover{
+  background-color: @content-bg !important;
+}
+.change-ui-select-key .ui-select-toggle:active{
+  border: none !important;
+  box-shadow: none !important;
+}
+.change-ui-select-key .ui-select-match{
+  display: block !important;
+}
+//key列表中的三角
+.change-ui-select-key .triangle::after {
+  content: '';
+  display: inline-block;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid #fff;
+  position: absolute;
+  top: 2px;
+  right: 122px;
+}
+.change-ui-select-key .triangle{
+  right: 35px;
+}
+//key列表
+.change-ui-select-key .ui-select-bootstrap .ui-select-choices{
+  position: absolute !important;
+  left: 10px;
+}
+
+//查询按钮
+.query {
+  margin-left:-16px !important;
+}
+.query-margin-124 {
+  margin-left: -124px;
+}
+.query-margin-30 {
+  margin-left: -30px !important;
+}
+.query-margin-42 {
+  margin-left: -42px !important;
+}
+.query-margin-15 {
+  margin-left: 15px;
+}
+.query-width {
+  width: 103px;
+  padding-left:0 !important;
+}
+.query-width-80 {
+  width: 80px;
+  padding-left:0 !important;
+}
+.query-padding-0 {
+  padding-left:0 !important;
+}
+//input 查询
+.margin-left--18{
+  margin-left: -18px;
+}
+.margin-left--20{
+  margin-left: -20px;
+}
+.unique-key-style .ui-select-bootstrap .ui-select-toggle>.caret{
+  top: 12px!important;
+}

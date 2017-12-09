@@ -1,0 +1,32 @@
+{
+  "data":{
+    "result": "success",
+    "totalRows":3,
+    "rows":[
+      {
+        "userName": "13214234e@qq.com",
+        "showName": "张三",
+        "role": "管理员",
+        "phone": "12345265e",
+        "email": "13214234e@qq.com",
+        "loginTime": "2017-7-1 11:45:36"
+      },
+      {
+        "userName": "3454657@qq.com",
+        "showName": "李四",
+        "role": "管理员",
+        "phone": "3454565用",
+        "email": "13214234e@qq.com",
+        "loginTime": "2017-7-1 11:45:36"
+      },
+      {
+        "userName": "2353464@qq.com",
+        "showName": "张三",
+        "role": "管理员",
+        "phone": "12345265e",
+        "email": "13214234e@qq.com",
+        "loginTime": "2017-7-1 11:45:36"
+      }
+    ]
+  }
+}

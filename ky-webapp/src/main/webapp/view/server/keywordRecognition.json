@@ -1,0 +1,29 @@
+{
+  "data":{
+    "result": "success",
+    "totalRows":3,
+    "rows":[
+      {
+        "keywordName": "是粉色如果",
+        "videoName": "test1.MP4",
+        "type": "音频",
+        "startTime": "2017-7-1 11:45:36",
+        "endTime": "2017-7-1 11:45:36"
+      },
+      {
+        "keywordName": "似的发射点",
+        "videoName": "test2.MP4",
+        "type": "OCR",
+        "startTime": "2017-7-1 11:45:36",
+        "endTime": "2017-7-1 11:45:36"
+      },
+      {
+        "keywordName": "阿瑟瑞上访人虽然",
+        "videoName": "test3.MP4",
+        "type": "音频",
+        "startTime": "2017-7-1 11:45:36",
+        "endTime": "2017-7-1 11:45:36"
+      }
+    ]
+  }
+}

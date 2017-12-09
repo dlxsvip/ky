@@ -1,0 +1,32 @@
+.container-fluid(ng-controller='userInfoBaseCtrl')
+    form.form-horizontal.col-lg-5(name='invoiceForm')
+        .form-group
+            label.col-lg-3.control-label
+                span 用户名：
+            .col-lg-9
+                input.form-control(type='text', ng-disabled="true", ng-model="userInfo.loginName")
+        .form-group
+            label.col-lg-3.control-label
+                span 显示名：
+            .col-lg-9
+                input.form-control(type='text', ng-disabled="true", ng-model="userInfo.nickName")
+        .form-group
+            label.col-lg-3.control-label
+                span 角色：
+            .col-lg-9
+                input.form-control(type='text', ng-disabled="true", ng-model="userInfo.roles")
+        .form-group
+            label.col-lg-3.control-label
+                span 手机：
+            .col-lg-9
+                input.form-control(type='text', ng-disabled="true", ng-model="userInfo.cellphoneNum")
+        .form-group
+            label.col-lg-3.control-label
+                span Email：
+            .col-lg-9
+                input.form-control(type='text', ng-disabled="true", ng-model="userInfo.email")
+        .form-group
+            label.col-lg-3.control-label
+                span 最近登陆：
+            .col-lg-9
+                input.form-control(type='text', ng-disabled="true", ng-model="userInfo.loginTime")

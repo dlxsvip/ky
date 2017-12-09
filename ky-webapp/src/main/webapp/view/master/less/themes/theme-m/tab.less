@@ -1,0 +1,187 @@
+h3 + div{
+  clear: both;
+}
+
+//tab-dtdream for the first level
+.tab-dtdream {
+  font-size: 12px;
+  float: left;
+  position: relative;
+  margin-top: 0px;
+  color: #333;
+  font-weight: @font-yahei-light;
+  border-top: 1px solid #dddddd;
+  border-right: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
+  padding: 12px 20px;
+  background-color: #f2f2f2;
+  z-index: 999;
+  &:hover, &:focus {
+    border-top: 2px solid @theme-m-primary;
+    color: #333;
+    padding: 11px 20px 12px 20px;
+    background-color: #fff;
+    border-bottom: 1px solid #dddddd;
+  }
+}
+.tab-dtdream:first-child{
+  border-left:1px solid #dddddd;
+}
+.page-header .tab-dtdream:nth-child(2) {
+  border-left: 1px solid #dddddd;
+}
+.tab-dtdream-active{
+  padding: 11px 20px 12px 20px;
+}
+.tab-dtdream-active,.tab-dtdream-active:hover,.tab-dtdream-active:focus{
+  border-top: 2px solid @theme-m-primary;
+  color: #333;
+  background-color: #fff;
+  border-bottom: 1px solid transparent;
+  cursor: default;
+  padding: 11px 20px 12px 20px;
+}
+
+//nav-tabs for the first level
+.nav-tabs > li.active{
+  a {
+    color: #333 !important;
+  }
+  &:hover,:focus{
+    a{
+      border-top: 2px solid @theme-m-primary;
+      padding: 11px 20px 12px 20px;
+      border-top: 1px solid #dddddd;
+      border-right: 1px solid #dddddd;
+      border-bottom: 1px solid #dddddd;
+    }
+  }
+}
+
+.nav-tabs {
+  border-bottom: 1px solid #dddddd;
+  margin-top: 0px;
+}
+.nav-tabs > li > a {
+  font-size: 12px;
+  color: #333;
+  font-weight: @font-yahei-light;
+  background-color: #f2f2f2;
+  margin: 0;
+  border-top: 1px solid #dddddd;
+  border-right: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
+  border-left: none;
+  border-radius: 0;
+  padding: 12px 20px;
+  &:hover {
+    border-top: 2px solid @theme-m-primary;
+    padding: 11px 20px 12px 20px;
+  }
+  &.active {
+    border-top: none;
+    padding: 11px 20px 12px 20px;
+  }
+}
+
+.nav-tabs > li:nth-child(1) {
+  a {
+    border-left: 1px solid #dddddd;
+  }
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+  padding: 11px 20px 12px 20px;
+  border-top: 2px solid @theme-m-primary;
+  border-left: none;
+  border-bottom: transparent;
+}
+
+.nav-tabs > li.active:nth-child(1) {
+  a {
+    border-left: 1px solid #dddddd;
+  }
+  a:hover,a:focus {
+    border-left: 1px solid #dddddd;
+  }
+}
+
+//tab-dtdream for the second level
+.tabbable  .tab-dtdream{
+  float: none !important;
+  background-color: transparent !important;
+  font-size: 12px !important;
+  padding-bottom: 9.5px !important;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  margin-left: 20px;
+  font-weight: normal !important;
+  color: #333 !important;
+  cursor: pointer !important;
+  border: none !important;
+}
+
+.tabbable  .tab-dtdream-active,.tabbable  .tab-dtdream:hover,.tabbable  .tab-dtdream:focus {
+  border-top: none !important;
+  background-color: transparent !important;
+  padding-bottom: 3px !important;
+  border-bottom: 1px solid @theme-m-primary !important;
+  color: @theme-m-primary !important;
+}
+.container-fluid .tab-content{
+  border: 1px solid #dddddd;
+  background-color: #fff;
+  margin-top: -2px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+}
+
+//nav-tabs for the third level
+.tabbable .tab-content {
+  border: 1px solid #dddddd;
+  margin-top: -22px;
+  .tab-content{
+    border: none;
+    margin-top: -35px;
+  }
+  .host-hardware {
+    .tab-content {
+      margin-top: 0;
+    }
+  }
+  .host-config-tab {
+    margin-top: 0;
+  }
+  .page-header {
+    padding-bottom: 9.5px;
+    border-bottom: none;
+  }
+  .nav-tabs{
+    border: none;
+    margin-top: 0px;
+    > li {
+      &.active {
+        border-top: none;
+        a {
+          color: @theme-m-primary;
+          border: none;
+        }
+      }
+      &:hover,:focus{
+        border-top: none;
+      }
+      a {
+        font-size: 10px;
+        color: #666666;
+        font-weight: @font-yahei-light;
+        background-color: transparent;
+        margin: 0;
+        border: none;
+        padding: 10px 20px;
+        &:hover, &:focus {
+          color: @theme-m-primary;
+        }
+      }
+    }
+  }
+}

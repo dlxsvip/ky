@@ -1,0 +1,43 @@
+{
+  "data":{
+    "result": "success",
+    "totalRows":5,
+    "rows":[
+      {
+        "roleName": "听",
+        "userNum": 3,
+        "privilege": "miaousdhfudcs",
+        "isDefault": true,
+        "roleId": "11111111111"
+      },
+      {
+        "roleName": "说",
+        "userNum": 2,
+        "privilege": "miaousdhfudcs",
+        "isDefault": true,
+        "roleId": "22222222"
+      },
+      {
+        "roleName": "读",
+        "userNum": 3,
+        "privilege": "miaousdhfudcs",
+        "isDefault": false,
+        "roleId": "333333333"
+      },
+      {
+        "roleName": "写",
+        "userNum": 4,
+        "privilege": "miaousdhfudcs",
+        "isDefault": true,
+        "roleId": "444444444444"
+      },
+      {
+        "roleName": "练",
+        "userNum": 0,
+        "privilege": "fhbgfhg",
+        "isDefault": false,
+        "roleId": "55555555555555"
+      }
+    ]
+  }
+}

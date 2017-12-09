@@ -1,0 +1,12 @@
+[
+  "bower_components/jquery/dist/jquery.min.js",
+  "bower_components/modernizr/modernizr.js",
+  "bower_components/fontawesome/css/font-awesome.min.css",
+  "bower_components/fontawesome/fonts/*",
+  "bower_components/simple-line-icons/*",
+  "bower_components/angular-websocket/dist/angular-websocket.min.js",
+  "bower_components/crypto-js/*",
+  "bower_components/angularjs-toaster/*",
+  "bower_components/weather-icons/css/weather-icons.min.css",
+  "bower_components/angular-block-ui/dist/angular-block-ui.min.js"
+]

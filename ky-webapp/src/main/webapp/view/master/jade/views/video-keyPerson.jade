@@ -1,0 +1,71 @@
+h3.page-header
+    span 详情 > {{detail}}
+    a(ng-controller='cloudResourceHeadReturnCtl')
+        button.btn.btn-xs.btn-default(type='button',ng-click='goBack()')
+            em.dtdream.dtdream-goback
+            span 返回
+.row.vedio
+    .col-lg-9
+        .col-lg-2.row
+            piece-time-flash(time-list="timeList", vedio-text='vedioText', vedio-keyword='vedioKeyword', type-request='keyPerson', video-id='videoId')
+        .col-lg-10.row
+            div
+                video(controls="" width="100%" ng-src="{{remoteAddress | trusted}}" id="keyPerson")
+                    | 您的浏览器不支持 video 标签
+    .col-lg-3.row.vedioInfo
+        div
+            form.form-inline.form-validate
+                .bk-form-row.mv-lg.row
+                    label.control-label.align-left.text-weight-normal.col-lg-3.text-right.fontWeight-normal
+                        span
+                        | 头像：
+                    .col-lg-7
+                        img(ng-src='{{person.personImageAddress}}', style='width: 100%; height: 100%;')
+                .bk-form-row.mv-lg.row
+                    label.control-label.align-left.text-weight-normal.col-lg-3.text-right.fontWeight-normal
+                        span
+                        | 名称：
+                    .col-lg-7
+                        span {{person.personName}}
+                .bk-form-row.mv-lg.row
+                    label.control-label.align-left.text-weight-normal.col-lg-3.text-right.fontWeight-normal
+                        span
+                        | 年龄：
+                    .col-lg-7
+                        span {{person.age}}
+                .bk-form-row.mv-lg.row
+                    label.control-label.align-left.text-weight-normal.col-lg-3.text-right.fontWeight-normal
+                        span
+                        | 性别：
+                    .col-lg-7
+                        span {{person.sex}}
+                .bk-form-row.mv-lg.row
+                    label.control-label.align-left.text-weight-normal.col-lg-3.text-right.fontWeight-normal
+                        span
+                        | 国籍：
+                    .col-lg-7
+                        span {{person.nationality}}
+                .bk-form-row.mv-lg.row
+                    label.control-label.align-left.text-weight-normal.col-lg-3.text-right.fontWeight-normal
+                        span
+                        | 地区：
+                    .col-lg-7
+                        span {{person.area}}
+                .bk-form-row.mv-lg.row
+                    label.control-label.align-left.text-weight-normal.col-lg-3.text-right.fontWeight-normal
+                        span
+                        | 职位：
+                    .col-lg-7
+                        span {{person.rank}}
+                .bk-form-row.mv-lg.row
+                    label.control-label.align-left.text-weight-normal.col-lg-3.text-right.fontWeight-normal
+                        span
+                        | 描述：
+                    .col-lg-7
+                        span {{person.description}}
+    .col-lg-12.pt-lg
+        .detail
+            .col-lg-9.vedio-text(ng-bind-html="vedioText")
+            .col-lg-3.vedio-keyword
+                .detail-title.text-center.row 关键词
+                .detail-content.pt-lg.row {{vedioKeyword}}

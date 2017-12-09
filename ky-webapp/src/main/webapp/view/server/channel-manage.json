@@ -1,0 +1,23 @@
+{
+  "data":{
+    "result": "success",
+    "totalRows":3,
+    "rows":[
+      {
+        "channel": "host1",
+        "status":"采集中",
+        "description":"东方广场吗黑寡妇"
+      },
+      {
+        "channel": "host2",
+        "status":"错误",
+        "description":"iu同仁堂官方"
+      },
+      {
+        "channel": "host3",
+        "status":"停止",
+        "description":"减肥哈就发货地啊"
+      }
+    ]
+  }
+}

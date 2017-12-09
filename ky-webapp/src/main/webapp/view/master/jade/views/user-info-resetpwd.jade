@@ -1,0 +1,22 @@
+.container-fluid(ng-controller="userInfoResetPwdCtrl")
+    div(style="margin: 20px 185px;")
+        span.kindly-reminder-heading 温馨提示：
+        div
+            span 您将要重置
+            span(style="color:red;") {{nickName}}
+            span 用户的密码
+    div.remind-account
+    form.form-horizontal.col-lg-5(name='editPasswordForm',novalidate="")
+        .form-group
+            label.col-lg-3.control-label
+                span 当前管理员密码校验：
+            .col-lg-9
+                input.form-control(type='password', name='currentPassword', ng-model="currentPassword", ng-required="true", ng-focus="hide()" ng-blur="checkPassword(currentPassword)")
+                small.text-danger(ng-show="") 请输入正确密码
+                small.text-danger(ng-show="editPasswordForm.currentPassword.$dirty && editPasswordForm.currentPassword.$error.required") 必填项
+        .form-group
+            label.col-lg-3.control-label
+                span &nbsp;
+            .col-lg-9
+                button.btn.brand-btn-color-a.brand-btn-abandon-focus(type='button', ng-click='resetPassword()' ng-disabled="editPasswordForm.$invalid || isCheckFail") 重置
+

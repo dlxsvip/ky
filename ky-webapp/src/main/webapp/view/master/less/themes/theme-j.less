@@ -1,0 +1,377 @@
+
+@import '../bootstrap/variables';
+@import '../bootstrap/mixins/gradients';
+@import '../app/media-queries';
+
+
+// 
+// Variables to change general look 
+// 
+
+// LAYOUT
+
+//@content-bg:                    #f2f2f2;
+@content-bg:                    @body-bg;
+@aside-bg:                      #434f5e;
+// NAVBAR TOP
+
+@nav-top-bg:                     #00b5ed;
+@nav-top-bg-color:              darken(@nav-top-bg, 4%);
+@nav-top-hover-bg:              @nav-top-bg;
+@nav-top-bg-start:              @nav-top-bg;
+@nav-top-bg-end:                @nav-top-bg;
+@nav-header-bg:                 #00b5ed;
+
+@nav-top-item-mobile:           #fff;
+@nav-top-item-mobile-active:    darken(@nav-top-item-mobile, 20%);
+
+@nav-top-item-desktop:          #fff;
+@nav-top-item-desktop-active:   darken(@nav-top-item-desktop, 20%);
+
+// SIDEBAR
+
+@sidebar-bg:                      @aside-bg;
+
+@sidebar-item-color:              #c8deeb;
+@sidebar-item-color-active:       #00b4ed;
+@sidebar-item-bg-active:          #2b3541;
+@sidebar-item-collapse:           #374251;
+
+@sidebar-icon-color:              @sidebar-item-color;
+@sidebar-icon-color-active:       @sidebar-item-color-active;
+
+@sidebar-bullet-color:            rgba(0,0,0,.25);
+@sidebar-bullet-color-active:     @sidebar-icon-color-active;
+
+@sidebar-heading-color:           #919DA8;
+@sidebar-label-color:             @sidebar-item-color;
+
+// OFFSIDEBAR
+
+@offsidebar-bg:           #fff;
+@offsidebar-border-color: greyscale(darken(@offsidebar-bg, 20%));
+@offsidebar-color:        @text-color;
+
+
+/* ========================================================================
+   Component: layout
+ ========================================================================== */
+
+body,
+.wrapper > section {
+  background-color: @content-bg;
+}
+
+.wrapper > .aside { 
+  background-color: @aside-bg;
+}
+
+.wrapper {
+  background-color: @content-bg !important;
+  .aside-inner {
+    .sidebar {
+      background-color: @aside-bg;
+    }
+  }
+}
+
+/* ========================================================================
+   Component: top-navbar
+ ========================================================================== */
+
+// Navbar Mobile General styles
+// ------------------------------
+
+.topnavbar {
+  background-color: #fff;
+  .navbar-header {
+    background-color: @nav-header-bg;
+    #gradient.horizontal(@nav-top-bg-start, @nav-top-bg-end);
+    @media @tablet {
+      background-image: none;
+    }
+
+    .brand-logo{
+      a {
+        margin-left: 19px;
+      }
+    }
+    a {
+      color: #fff;;
+    }
+
+    a:active, a:hover {
+      color: darken(#fff, 20%);
+    }
+  }
+  
+  .navbar-nav > li > a,
+  .navbar-nav > .open > a {
+    color: @nav-top-item-mobile;
+    &:hover, &:focus {
+      color: @nav-top-item-mobile-active;
+    }
+  }
+
+  // Navbar link active style
+  .navbar-nav > .active > a,
+  .navbar-nav > .open   > a {
+    &, &:hover, &:focus {
+      background-color: transparent;
+    }
+  }
+
+  // the button to toggle search
+  .navbar-nav > li > [data-toggle='navbar-search'] {
+    color: @nav-top-item-desktop;
+  }
+  
+  .nav-wrapper {
+    background-color: @nav-top-bg;
+    #gradient.horizontal(@nav-top-bg-start, @nav-top-bg-end);
+  }
+}
+// Navbar Desktop styles
+// ------------------------------
+
+@media @tablet {
+
+  // Navbar top styles
+  .topnavbar {
+    background-color: @nav-top-bg;
+    #gradient.horizontal(@nav-top-bg-start, @nav-top-bg-end);
+
+    .navbar-nav > .open > a {
+      &, &:hover, &:focus {
+        box-shadow: 0 -3px 0 rgba(255,255,255,.5) inset;
+      }
+    }
+
+    .navbar-nav > li > a,
+    .navbar-nav > .open > a {
+      color: @nav-top-item-desktop;
+      &:hover, &:focus {
+        color: @nav-top-item-mobile-active;
+      }
+    }
+
+  } // .topnavbar
+
+}
+
+/* ========================================================================
+   Component: sidebar
+ ========================================================================== */
+.wrapper {
+  .aside-inner {
+    .sidebar {
+      background-color: @sidebar-bg;
+
+      .nav-heading {
+        color: @sidebar-heading-color;
+      }
+
+      // Items
+      .nav {
+        > li {
+          //& .sidebar-subnav.collapse.in {
+          //  background-color: @sidebar-item-collapse;
+          //  color: @sidebar-item-color-active;
+          //}
+          > a,
+          > .nav-item {
+            color: @sidebar-item-color;
+            background-color: @aside-bg;
+            &:focus, &:hover {
+              color: @sidebar-item-color-active;
+              background-color: @sidebar-item-bg-active;
+
+              > em {
+                color: @sidebar-item-color-active;
+              }
+            }
+            // Item icon
+            > em {
+              color: @sidebar-icon-color;
+            }
+          }
+
+          // Active item state
+          &.active,
+          &.open{
+            &,
+            .nav {
+              background-color: @sidebar-item-collapse;
+              color: @sidebar-item-color-active;
+            }
+            > a {
+              color: @sidebar-item-color-active;
+              background-color: @sidebar-item-bg-active;;
+            }
+            > a.active {
+              background-color: @sidebar-item-bg-active;
+            }
+            > a > em {
+              color: @sidebar-icon-color-active;
+            }
+
+            > ul.nav.sidebar-subnav {
+              background-color: @sidebar-bg;
+              > li.active {
+                > a.active {
+                  background-color: @sidebar-item-bg-active !important;
+                }
+              }
+              > li {
+                > a:hover {
+                  background-color: @sidebar-item-bg-active !important;
+                }
+              }
+            }
+          }
+
+          &:hover {
+            border-left-color: @sidebar-item-bg-active;
+          }
+          &.active {
+            border-left-color: @sidebar-item-color-active;
+          }
+        }
+      }
+    }
+  }
+
+  .topnavbar-wrapper {
+    .navbar {
+      border: 0 solid transparent;
+      background-color: @nav-top-bg-color;
+      background-image: -webkit-linear-gradient(left, @nav-top-bg-color 0%, @nav-top-bg-color 100%);
+    }
+    .navbar-default {
+
+      .navbar-header {
+        .navbar-brand{
+          .brand-logo{
+            background: @nav-top-bg-color;
+            padding: 11px 15px;
+          }
+        }
+      }
+
+      .navbar-nav {
+        .active > a,  a:hover, a:focus {
+          color: #ffffff;
+          background-color: @nav-top-hover-bg;
+
+        }
+      }
+
+      .navbar-nav > li > a, .navbar-default>.navbar-nav > .open > a {
+        color: #ffffff;
+        z-index: 11;
+        height: 57px;
+        line-height: 57px;
+        padding: 0 15px;
+      }
+    }
+  }
+}
+ul.nav.sidebar-subnav {
+  background-color: @sidebar-bg;
+  > .sidebar-subnav-header {
+    color: @sidebar-item-color;
+  }
+  > li  {
+    > a,
+    > .nav-item {
+      color: @sidebar-item-color;
+      &:focus, &:hover {
+        color: @sidebar-item-color-active;
+        background-color: @sidebar-item-bg-active;
+      }
+    }
+
+    &.active {
+      background-color: @sidebar-item-bg-active;
+      > a,
+      > .nav-item {
+        color: @sidebar-icon-color-active;
+        &:after {
+          border-color: @sidebar-bullet-color-active;
+          background-color: @sidebar-bullet-color-active;
+        }
+      }
+
+      > a.active {
+        background-color: @sidebar-item-bg-active;
+      }
+    }
+  } // li
+}
+
+/* ========================================================================
+   Component: offsidebar
+ ========================================================================== */
+
+.offsidebar {
+  border-left: 1px solid @offsidebar-border-color;
+  background-color: @offsidebar-bg;
+  color: @offsidebar-color;
+}
+
+/* ========================================================================
+   Component: search row style
+ ========================================================================== */
+
+@media screen and (min-width: 1440px) {
+  .row.search-dtdream .search-dtdream-row .pull-right {
+    margin-right: -1%;
+  }
+}
+@media screen and (max-width: 1440px) {
+  .row.search-dtdream .search-dtdream-row .pull-right {
+    margin-right: 0%;
+  }
+}
+.row.search-dtdream .search-dtdream-row.ml-0p {
+  margin-left: 0% !important;
+}
+
+/* ========================================================================
+   Component: tab style
+ ========================================================================== */
+.tab-content {
+  padding:0 !important;
+  padding-top:15px !important;
+}
+/* ========================================================================
+   Component: table style
+ ========================================================================== */
+.table-dtdream tbody tr td .btn-group {
+  >em {
+    display: none;
+  }
+  >a {
+    display: inline-block;
+  }
+  >a.management {
+    display: block;
+    .text {
+      display: inline-block;
+    }
+    em {
+      display: none;
+    }
+  }
+}
+.table-dtdream tbody tr[ng-repeat] td:last-child {
+  width: 10%;
+}
+.table-dtdream tbody tr[ng-repeat] td.last:last-child {
+  width: initial;
+}
+.mg-l{
+  margin-left:11px;
+}
+
+

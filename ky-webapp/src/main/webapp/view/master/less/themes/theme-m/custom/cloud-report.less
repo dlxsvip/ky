@@ -1,0 +1,86 @@
+.report-content {
+  .panel {
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0);
+  }
+  .nav-tabs {
+    border-bottom: transparent;
+    margin-bottom: 40px;
+  }
+  .nav-tabs> li > a {
+    border: transparent;
+    background-color: transparent;
+    float: none;
+    font-size: 12px;
+    padding: 0;
+    margin-right: 20px;
+    font-weight: 400;
+    color: #333;
+    cursor: pointer;
+    padding: 0px !important;
+  }
+  .nav-tabs > li.active > a {
+    border-bottom: 1px solid @sidebar-item-color-active !important;
+    color: @sidebar-item-color-active;
+  }
+  .report-content-panel {
+    .tab-content{
+      .tab-pane {
+        .col-lg-12 {
+          padding: 0;
+          .reportTable {
+            border: transparent;
+            padding: 0;
+          }
+        }
+      }
+    }
+    .row:nth-child(1) .pull-right {
+      margin: 10px 32px 0 0;
+    }
+    .report-content-row {
+      background-color: transparent;
+    }
+  }
+}
+// 资源使用评估报表
+.resource-evaluation {
+  .form-validate{
+    h4 {
+      display: none;
+    }
+  }
+  .resource-evaluation-tablebox {
+    padding-bottom: 100px;
+    position: relative;
+    .explanatory {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+    }
+    .add-evaluation {
+      position: absolute;
+      bottom: 35px;
+      left: -14px;
+    }
+    .evaluation-btn-box {
+      position: absolute;
+      top: 1px;
+      right: 5px;
+      text-align: right;
+    }
+  }
+}
+.resource-evaluation .table_style_ext thead tr th:nth-last-child(1) {
+  text-align: left;
+}
+
+.ml-config {
+  label {
+    font-size: 12px;
+    font-weight: 400;
+    color: #666;
+    vertical-align: middle;
+  }
+}
+

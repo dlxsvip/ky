@@ -1,0 +1,18 @@
+style.
+    .content-wrapper h3.page-header span:first-child{
+        display: block;
+    }
+div(ng-controller="userInfoCtrl")
+    h3.page-header
+        span {{nickName}} 用户信息
+            button.btn.btn-xs.btn-default(ng-click='goBack()', ng-if='nickName', style='position:absolute;margin:-7px 0 0 15px;')
+                em.dtdream.dtdream-goback
+                span 返回
+        span.tab-dtdream(ng-repeat='tab in tabList',ng-class="{false:'',true:'tab-dtdream-active'}[tab.active]",ng-click='setActiveTab(tab)') {{tab.CN}}
+.container-fluid
+    .row
+        .col-lg-12
+            .tabbable
+                .tab-content
+                    .tab-pane.active.content
+                        div(ui-view='')
