@@ -6,7 +6,7 @@ import com.aliyun.oss.model.PutObjectResult;
 import com.ky.logic.model.OssConfigModel;
 import com.ky.logic.model.SMGeneratePresignedUrlRequest;
 import com.ky.logic.model.SMObjectMetadata;
-import com.ky.logic.model.info.ResponseInfo;
+import com.ky.logic.model.info.ResponseMsg;
 import com.ky.logic.service.ISystemConfigService;
 import com.ky.logic.service.IUploadService;
 import com.ky.logic.utils.LoggerUtil;
@@ -57,15 +57,15 @@ public class UploadService implements IUploadService {
      * @return 通用结果
      */
     @Override
-    public ResponseInfo upload2oss(MultipartFile file) {
+    public ResponseMsg upload2oss(MultipartFile file) {
         String methodName = "upload2oss";
-        ResponseInfo responseInfo = new ResponseInfo();
+        ResponseMsg responseMsg = new ResponseMsg();
 
         try (InputStream inputStream = file.getInputStream()) {
 
             OssConfigModel ossConfigModel = systemConfigService.getConfigOss();
             if (null == ossConfigModel) {
-                responseInfo.createFailedResponse(null, "无系统OSS，请配置OSS", "无系统OSS，请配置OSS");
+                responseMsg.createFailedResponse(null, "无系统OSS，请配置OSS", "无系统OSS，请配置OSS");
             }
 
             // 初始化 oss 客户端
@@ -90,22 +90,22 @@ public class UploadService implements IUploadService {
             String url = oss.generatePresignedUrl(urlReq).toString();
             String ossUrl = url.substring(0, url.indexOf("?"));
 
-            responseInfo.createSuccessResponse(ossUrl);
+            responseMsg.createSuccessResponse(ossUrl);
 
             LoggerUtil.debugSysLog(this.getClass().getName(), methodName, "上传到OSS成功:" + ossUrl);
         } catch (OSSException e) {
-            responseInfo.createFailedResponse(null, "Oss授权失败，请检查Oss配置", e.getMessage());
+            responseMsg.createFailedResponse(null, "Oss授权失败，请检查Oss配置", e.getMessage());
             LoggerUtil.errorSysLog(this.getClass().getName(), methodName, "请检查OSS配置:" + e.getMessage());
         } catch (ClientException e) {
-            responseInfo.createFailedResponse(null, "OSS客户端异常,请检查Oss配置", e.getMessage());
+            responseMsg.createFailedResponse(null, "OSS客户端异常,请检查Oss配置", e.getMessage());
             LoggerUtil.errorSysLog(this.getClass().getName(), methodName, "请检查OSS配置:" + e.getMessage());
         } catch (Exception e) {
-            responseInfo.createFailedResponse(null, "OSS异常,请检查配置的OSS", e.getMessage());
+            responseMsg.createFailedResponse(null, "OSS异常,请检查配置的OSS", e.getMessage());
             LoggerUtil.errorSysLog(this.getClass().getName(), methodName, "请检查OSS配置:" + e.getMessage());
         }
 
 
-        return responseInfo;
+        return responseMsg;
     }
 
     /**
@@ -116,9 +116,9 @@ public class UploadService implements IUploadService {
      * @return 通用结果
      */
     @Override
-    public ResponseInfo upload2local(MultipartFile file, String dir) {
+    public ResponseMsg upload2local(MultipartFile file, String dir) {
         String methodName = "upload2local";
-        ResponseInfo responseInfo = new ResponseInfo();
+        ResponseMsg responseMsg = new ResponseMsg();
 
         String filePath = WebPathUtil.getViewSubDir("data" + File.separator + dir);
         /* 构建文件目录 */
@@ -144,15 +144,15 @@ public class UploadService implements IUploadService {
             // http 全路径
             //String imageUrl = rootUrl + "/view/data/" + dir + "/" + newFileName;
 
-            responseInfo.createSuccessResponse(imageUrl);
+            responseMsg.createSuccessResponse(imageUrl);
 
             LoggerUtil.debugSysLog(this.getClass().getName(), methodName, "上传到本地成功:" + imageUrl);
         } catch (IOException e) {
-            responseInfo.createFailedResponse(null, "本地保存文件异常", e.getMessage());
+            responseMsg.createFailedResponse(null, "本地保存文件异常", e.getMessage());
             LoggerUtil.errorSysLog(this.getClass().getName(), methodName, "本地保存文件异常:" + e.getMessage());
         }
 
-        return responseInfo;
+        return responseMsg;
     }
 
     /**
@@ -164,12 +164,12 @@ public class UploadService implements IUploadService {
     @Override
     public String upload2oss(String filePath) {
         String methodName = "upload2local";
-        ResponseInfo responseInfo = new ResponseInfo();
+        ResponseMsg responseMsg = new ResponseMsg();
         String ossUrl = "";
         try {
             OssConfigModel ossConfigModel = systemConfigService.getConfigOss();
             if (null == ossConfigModel) {
-                responseInfo.createFailedResponse(null, "无系统OSS，请配置OSS", "无系统OSS，请配置OSS");
+                responseMsg.createFailedResponse(null, "无系统OSS，请配置OSS", "无系统OSS，请配置OSS");
             }
 
             // 初始化 oss 客户端
@@ -193,7 +193,7 @@ public class UploadService implements IUploadService {
             String url = oss.generatePresignedUrl(urlReq).toString();
             ossUrl = url.substring(0, url.indexOf("?"));
 
-            responseInfo.createSuccessResponse(ossUrl);
+            responseMsg.createSuccessResponse(ossUrl);
 
             LoggerUtil.debugSysLog(this.getClass().getName(), methodName, "上传到OSS成功:" + ossUrl);
         } catch (Exception e) {

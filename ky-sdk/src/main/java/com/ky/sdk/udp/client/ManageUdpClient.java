@@ -1,9 +1,9 @@
 package com.ky.sdk.udp.client;
 
 
-import com.ky.pm.model.FaceAlarmMsgModel;
-import com.ky.pm.model.KeywordAlarmMsgModel;
-import com.ky.pm.model.ResponseInfo;
+import com.ky.pm.model.FaceMsgModel;
+import com.ky.pm.model.WordMsgModel;
+import com.ky.pm.model.ResponseMsg;
 import com.ky.sdk.udp.service.LiveBroadcastUdpService;
 
 /**
@@ -31,7 +31,7 @@ public class ManageUdpClient {
      * @param keyWordAlarm 告警信息
      * @return responseInfo
      */
-    public ResponseInfo keywordAlarmSend(KeywordAlarmMsgModel keyWordAlarm) {
+    public ResponseMsg keywordAlarmSend(WordMsgModel keyWordAlarm) {
         return liveBroadcastUdpService.keywordAlarmSend(keyWordAlarm);
     }
 
@@ -42,7 +42,7 @@ public class ManageUdpClient {
      * @param faceAlarm 告警信息
      * @return responseInfo
      */
-    public ResponseInfo faceAlarmSend(FaceAlarmMsgModel faceAlarm) {
+    public ResponseMsg faceAlarmSend(FaceMsgModel faceAlarm) {
         return liveBroadcastUdpService.faceAlarmSend(faceAlarm);
     }
 

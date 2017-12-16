@@ -3,7 +3,7 @@ package com.ky.logic.controller;
 import com.ky.logic.common.cache.SystemCache;
 import com.ky.logic.entity.UserEntity;
 import com.ky.logic.entity.UserLoginCtrlEntity;
-import com.ky.logic.model.info.ResponseInfo;
+import com.ky.logic.model.info.ResponseMsg;
 import com.ky.logic.service.IUserService;
 import com.ky.logic.utils.AesUtil;
 import com.ky.logic.utils.BCryptUtil;
@@ -37,8 +37,8 @@ public class LoginController {
 
     @RequestMapping(value = {"/loginSuccess"})
     @ResponseBody
-    public ResponseInfo loginSuccess(HttpServletRequest request, HttpServletResponse response) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseMsg loginSuccess(HttpServletRequest request, HttpServletResponse response) {
+        ResponseMsg responseMsg = new ResponseMsg();
 
         try {
             Map<String, String[]> tmp = request.getParameterMap();
@@ -51,14 +51,14 @@ public class LoginController {
 
             UserLoginCtrlEntity userLoginCtrl = user.getUserLoginCtrl();
             if (userLoginCtrl.getIsNeedToLoginAas()) {
-                responseInfo.createFailedResponse(null, "701", "初次登录需要修改初密码");
-                return responseInfo;
+                responseMsg.createFailedResponse(null, "701", "初次登录需要修改初密码");
+                return responseMsg;
             }
 
             //判断当前用户是否处于激活状态
             if (!user.getActive()) {
-                responseInfo.createFailedResponse(null, "702", "该用户未激活");
-                return responseInfo;
+                responseMsg.createFailedResponse(null, "702", "该用户未激活");
+                return responseMsg;
             }
 
             // 校验是否禁闭
@@ -67,15 +67,15 @@ public class LoginController {
                 // n 单位秒，格式化到 分
                 n = n / (1000 * 60);
 
-                responseInfo.createFailedResponse(null, "703", n + "");
-                return responseInfo;
+                responseMsg.createFailedResponse(null, "703", n + "");
+                return responseMsg;
             }
 
             // 校验密码是否快到期
             boolean b = userService.isPwdExpire(userLoginCtrl);
             if (b) {
-                responseInfo.createFailedResponse(null, "704", "密码即将到期，请修改");
-                return responseInfo;
+                responseMsg.createFailedResponse(null, "704", "密码即将到期，请修改");
+                return responseMsg;
             }
 
 
@@ -87,27 +87,27 @@ public class LoginController {
             user.setLoginTime(new Date());
 
             userService.modifyUser(user);
-            responseInfo.createSuccessResponse("success");
+            responseMsg.createSuccessResponse("success");
         } catch (Exception e) {
             e.printStackTrace();
-            responseInfo.createFailedResponse(null, "用户登录处理异常", "请联系管理员");
+            responseMsg.createFailedResponse(null, "用户登录处理异常", "请联系管理员");
         }
-        return responseInfo;
+        return responseMsg;
     }
 
 
     @RequestMapping(value = {"/loginFailed"})
     @ResponseBody
-    public ResponseInfo loginFailed(HttpServletRequest request, HttpServletResponse response) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseMsg loginFailed(HttpServletRequest request, HttpServletResponse response) {
+        ResponseMsg responseMsg = new ResponseMsg();
         try {
             String username = request.getParameter("username");
 
             // 校验用户名
             UserEntity user = userService.queryByName(username);
             if (null == user) {
-                responseInfo.createFailedResponse(null, "登录名或密码错误", "1");
-                return responseInfo;
+                responseMsg.createFailedResponse(null, "登录名或密码错误", "1");
+                return responseMsg;
             }
 
             // 校验密码
@@ -137,16 +137,16 @@ public class LoginController {
                 // 更新数据
                 userService.modifyUser(user);
 
-                responseInfo.createFailedResponse(null, "登录名或密码错误", "2");
-                return responseInfo;
+                responseMsg.createFailedResponse(null, "登录名或密码错误", "2");
+                return responseMsg;
             }else{
                 LoggerUtil.debugSysLog("","","用户名和密码正确，请检查其他项");
             }
         } catch (Exception e) {
-            responseInfo.createFailedResponse(null, "登录名或密码错误", "");
+            responseMsg.createFailedResponse(null, "登录名或密码错误", "");
         }
 
-        return responseInfo;
+        return responseMsg;
     }
 
 

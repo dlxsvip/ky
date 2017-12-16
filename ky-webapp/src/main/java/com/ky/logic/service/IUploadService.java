@@ -1,6 +1,6 @@
 package com.ky.logic.service;
 
-import com.ky.logic.model.info.ResponseInfo;
+import com.ky.logic.model.info.ResponseMsg;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -15,7 +15,7 @@ public interface IUploadService {
      * @param file 文件
      * @return 通用结果
      */
-    ResponseInfo upload2oss(MultipartFile file);
+    ResponseMsg upload2oss(MultipartFile file);
 
     /**
      * 上传到本地
@@ -24,7 +24,7 @@ public interface IUploadService {
      * @param dir  目录
      * @return 通用结果
      */
-    ResponseInfo upload2local(MultipartFile file, String dir);
+    ResponseMsg upload2local(MultipartFile file, String dir);
 
 
     /**

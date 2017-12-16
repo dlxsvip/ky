@@ -1,8 +1,8 @@
 package com.ky.sdk.udp.service;
 
-import com.ky.pm.model.FaceAlarmMsgModel;
-import com.ky.pm.model.KeywordAlarmMsgModel;
-import com.ky.pm.model.ResponseInfo;
+import com.ky.pm.model.FaceMsgModel;
+import com.ky.pm.model.WordMsgModel;
+import com.ky.pm.model.ResponseMsg;
 import com.ky.pm.type.MethodType;
 import com.ky.sdk.udp.client.ManageUdpClient;
 import com.ky.sdk.utils.JacksonUtil;
@@ -31,8 +31,8 @@ public class LiveBroadcastUdpService extends AUdpClientService {
      * @param keyWordAlarm 告警信息
      * @return responseInfo
      */
-    public ResponseInfo keywordAlarmSend(KeywordAlarmMsgModel keyWordAlarm) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseMsg keywordAlarmSend(WordMsgModel keyWordAlarm) {
+        ResponseMsg responseMsg = new ResponseMsg();
 
         String json = JacksonUtil.INSTANCE.obj2str(keyWordAlarm);
 
@@ -43,12 +43,12 @@ public class LiveBroadcastUdpService extends AUdpClientService {
 
         String result = doSend(data);
         if (StringUtils.equals("Send OK", result)) {
-            responseInfo.createSuccessResponse(result);
+            responseMsg.createSuccessResponse(result);
         } else {
-            responseInfo.createFailedResponse(null, "请求异常", "请求异常");
+            responseMsg.createFailedResponse(null, "请求异常", "请求异常");
         }
 
-        return responseInfo;
+        return responseMsg;
     }
 
     /**
@@ -57,8 +57,8 @@ public class LiveBroadcastUdpService extends AUdpClientService {
      * @param faceAlarm 告警信息
      * @return responseInfo
      */
-    public ResponseInfo faceAlarmSend(FaceAlarmMsgModel faceAlarm) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseMsg faceAlarmSend(FaceMsgModel faceAlarm) {
+        ResponseMsg responseMsg = new ResponseMsg();
 
         String json = JacksonUtil.INSTANCE.obj2str(faceAlarm);
 
@@ -70,12 +70,12 @@ public class LiveBroadcastUdpService extends AUdpClientService {
 
         String result = doSend(data);
         if (StringUtils.equals("Send OK", result)) {
-            responseInfo.createSuccessResponse(result);
+            responseMsg.createSuccessResponse(result);
         } else {
-            responseInfo.createFailedResponse(null, "请求异常", "请求异常");
+            responseMsg.createFailedResponse(null, "请求异常", "请求异常");
         }
 
-        return responseInfo;
+        return responseMsg;
     }
 
 

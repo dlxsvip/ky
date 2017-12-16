@@ -6,22 +6,27 @@ import java.util.Date;
 /**
  * Created by yl on 2017/7/22.
  */
-public class FaceAlarmMsgModel implements Serializable {
+public class WordMsgModel implements Serializable {
     private static final long serialVersionUID = 1L;
     /**
      * 分析结果id
      */
     private String analysisId;
 
-    private String personId;
+    /**
+     *
+     */
+    private String keywordId;
 
-    private String personName;
+    private String keywordName;
 
     private Integer startTime;
 
     private Integer endTime;
 
     private Date createTime;
+
+    private String text;
 
     private String videoId;
 
@@ -34,20 +39,20 @@ public class FaceAlarmMsgModel implements Serializable {
         this.analysisId = analysisId;
     }
 
-    public String getPersonId() {
-        return personId;
+    public String getKeywordId() {
+        return keywordId;
     }
 
-    public void setPersonId(String personId) {
-        this.personId = personId;
+    public void setKeywordId(String keywordId) {
+        this.keywordId = keywordId;
     }
 
-    public String getPersonName() {
-        return personName;
+    public String getKeywordName() {
+        return keywordName;
     }
 
-    public void setPersonName(String personName) {
-        this.personName = personName;
+    public void setKeywordName(String keywordName) {
+        this.keywordName = keywordName;
     }
 
     public Integer getStartTime() {
@@ -72,6 +77,14 @@ public class FaceAlarmMsgModel implements Serializable {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 
     public String getVideoId() {

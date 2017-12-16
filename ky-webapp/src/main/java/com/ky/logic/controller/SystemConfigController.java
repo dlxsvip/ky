@@ -5,7 +5,7 @@ import com.aliyun.oss.OSSClient;
 import com.ky.logic.entity.ConfigEntity;
 import com.ky.logic.entity.SystemConfigEntity;
 import com.ky.logic.model.OssConfigModel;
-import com.ky.logic.model.info.ResponseInfo;
+import com.ky.logic.model.info.ResponseMsg;
 import com.ky.logic.service.ISystemConfigService;
 import com.ky.logic.type.SystemConfigType;
 import com.ky.logic.utils.LoggerUtil;
@@ -44,24 +44,24 @@ public class SystemConfigController {
      */
     @RequestMapping(value = "/setOssConfig", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseInfo setOssConfig(@RequestParam(required = false) String endPoint,
-                                     @RequestParam(required = false) String bucketName,
-                                     @RequestParam(required = false) String accesskeyID,
-                                     @RequestParam(required = false) String accesskeyKey) {
+    public ResponseMsg setOssConfig(@RequestParam(required = false) String endPoint,
+                                    @RequestParam(required = false) String bucketName,
+                                    @RequestParam(required = false) String accesskeyID,
+                                    @RequestParam(required = false) String accesskeyKey) {
         String methodName = "setOssConfig";
-        ResponseInfo responseInfo = new ResponseInfo();
+        ResponseMsg responseMsg = new ResponseMsg();
 
         try {
             if (!PrivilegeUtil.HasSystemConfig()) {
-                responseInfo.createFailedResponse(null, "没有系统配置权限", "");
-                return responseInfo;
+                responseMsg.createFailedResponse(null, "没有系统配置权限", "");
+                return responseMsg;
             }
 
             // 校验
             /*boolean isValidate = checkAkForBucket(endPoint, bucketName, accesskeyID, accesskeyKey);
             if (!isValidate) {
-                responseInfo.createFailedResponse(null, "设置的OSS的ID与Key不匹配", "校验失败");
-                return responseInfo;
+                responseMsg.createFailedResponse(null, "设置的OSS的ID与Key不匹配", "校验失败");
+                return responseMsg;
             }*/
 
             SystemConfigEntity systemConfigEntity = systemConfigService.getSystemConfigEntity(SystemConfigType.OSSStorage);
@@ -84,13 +84,13 @@ public class SystemConfigController {
                 systemConfigService.addConfig(object.toString(), SystemConfigType.OSSStorage);
             }
 
-            responseInfo.createSuccessResponse("success");
+            responseMsg.createSuccessResponse("success");
         } catch (Exception e) {
-            responseInfo.createFailedResponse(null, "设置的OSS异常", e.getMessage());
+            responseMsg.createFailedResponse(null, "设置的OSS异常", e.getMessage());
             LoggerUtil.errorSysLog(this.getClass().getName(), methodName, "设置的OSS异常," + e.getMessage());
         }
 
-        return responseInfo;
+        return responseMsg;
     }
 
 
@@ -101,9 +101,9 @@ public class SystemConfigController {
      */
     @RequestMapping(value = "/getOSSConfig", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseInfo getOSSConfig() {
+    public ResponseMsg getOSSConfig() {
         String methodName = "getOSSConfig";
-        ResponseInfo responseInfo = new ResponseInfo();
+        ResponseMsg responseMsg = new ResponseMsg();
 
         try {
             Map<String, String> data = new HashMap<String, String>();
@@ -117,13 +117,13 @@ public class SystemConfigController {
                 data.put("bucketName", "");
                 data.put("accesskeyID", "");
             }
-            responseInfo.createSuccessResponse(data);
+            responseMsg.createSuccessResponse(data);
         } catch (Exception e) {
-            responseInfo.createFailedResponse(null, "获取OSS异常", e.getMessage());
+            responseMsg.createFailedResponse(null, "获取OSS异常", e.getMessage());
             LoggerUtil.errorSysLog(this.getClass().getName(), methodName, "获取OSS异常," + e.getMessage());
         }
 
-        return responseInfo;
+        return responseMsg;
     }
 
 
@@ -134,23 +134,23 @@ public class SystemConfigController {
      */
     @RequestMapping(value = "/cleanOssConfig", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseInfo cleanOssConfig(@RequestParam(required = false) String endPoint) {
+    public ResponseMsg cleanOssConfig(@RequestParam(required = false) String endPoint) {
         String methodName = "cleanOssConfig";
-        ResponseInfo responseInfo = new ResponseInfo();
+        ResponseMsg responseMsg = new ResponseMsg();
         try {
             if (!PrivilegeUtil.HasSystemConfig()) {
-                responseInfo.createFailedResponse(null, "没有系统配置权限", "");
-                return responseInfo;
+                responseMsg.createFailedResponse(null, "没有系统配置权限", "");
+                return responseMsg;
             }
 
             systemConfigService.cleanConfig(SystemConfigType.OSSStorage);
-            responseInfo.createSuccessResponse("success");
+            responseMsg.createSuccessResponse("success");
         } catch (Exception e) {
-            responseInfo.createFailedResponse(null, "清除OSS异常", e.getMessage());
+            responseMsg.createFailedResponse(null, "清除OSS异常", e.getMessage());
             LoggerUtil.errorSysLog(this.getClass().getName(), methodName, "清除OSS异常," + e.getMessage());
         }
 
-        return responseInfo;
+        return responseMsg;
     }
 
 
@@ -161,23 +161,23 @@ public class SystemConfigController {
      */
     @RequestMapping(value = "/updateConfig", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseInfo updateConfig(@RequestBody(required = false) ConfigEntity config) {
+    public ResponseMsg updateConfig(@RequestBody(required = false) ConfigEntity config) {
         String methodName = "updateConfig";
-        ResponseInfo responseInfo = new ResponseInfo();
+        ResponseMsg responseMsg = new ResponseMsg();
         try {
             if (!PrivilegeUtil.HasSystemConfig()) {
-                responseInfo.createFailedResponse(null, "没有系统配置权限", "");
-                return responseInfo;
+                responseMsg.createFailedResponse(null, "没有系统配置权限", "");
+                return responseMsg;
             }
 
             String configId = systemConfigService.updateConfig(config);
-            responseInfo.createSuccessResponse(configId);
+            responseMsg.createSuccessResponse(configId);
         } catch (Exception e) {
-            responseInfo.createFailedResponse(null, "修改系统配置异常", e.getMessage());
+            responseMsg.createFailedResponse(null, "修改系统配置异常", e.getMessage());
             LoggerUtil.errorSysLog(this.getClass().getName(), methodName, "修改系统配置异常," + e.getMessage());
         }
 
-        return responseInfo;
+        return responseMsg;
     }
 
     /**
@@ -187,29 +187,29 @@ public class SystemConfigController {
      */
     @RequestMapping(value = "/updateAllConfig", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseInfo updateAllConfig(@RequestBody(required = false) List<ConfigEntity> configs) {
+    public ResponseMsg updateAllConfig(@RequestBody(required = false) List<ConfigEntity> configs) {
         String methodName = "updateAllConfig";
-        ResponseInfo responseInfo = new ResponseInfo();
+        ResponseMsg responseMsg = new ResponseMsg();
         try {
             if (!PrivilegeUtil.HasSystemConfig()) {
-                responseInfo.createFailedResponse(null, "没有系统配置权限", "");
-                return responseInfo;
+                responseMsg.createFailedResponse(null, "没有系统配置权限", "");
+                return responseMsg;
             }
 
             if (null == configs || configs.size() == 0) {
-                responseInfo.createFailedResponse(null, "至少选择修改一项", "");
-                return responseInfo;
+                responseMsg.createFailedResponse(null, "至少选择修改一项", "");
+                return responseMsg;
             }
 
             String configIds = systemConfigService.updateAllConfig(configs);
 
-            responseInfo.createSuccessResponse(configIds);
+            responseMsg.createSuccessResponse(configIds);
         } catch (Exception e) {
-            responseInfo.createFailedResponse(null, "修改系统配置异常", e.getMessage());
+            responseMsg.createFailedResponse(null, "修改系统配置异常", e.getMessage());
             LoggerUtil.errorSysLog(this.getClass().getName(), methodName, "修改系统配置异常," + e.getMessage());
         }
 
-        return responseInfo;
+        return responseMsg;
     }
 
     /**
@@ -219,18 +219,18 @@ public class SystemConfigController {
      */
     @RequestMapping(value = "/getAllConfig", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseInfo getAllConfig() {
+    public ResponseMsg getAllConfig() {
         String methodName = "getAllConfig";
-        ResponseInfo responseInfo = new ResponseInfo();
+        ResponseMsg responseMsg = new ResponseMsg();
         try {
             List<ConfigEntity> configs = systemConfigService.getConfigs();
-            responseInfo.createSuccessResponse(configs);
+            responseMsg.createSuccessResponse(configs);
         } catch (Exception e) {
-            responseInfo.createFailedResponse(null, "获取系统配置异常", e.getMessage());
+            responseMsg.createFailedResponse(null, "获取系统配置异常", e.getMessage());
             LoggerUtil.errorSysLog(this.getClass().getName(), methodName, "获取系统配置异常," + e.getMessage());
         }
 
-        return responseInfo;
+        return responseMsg;
     }
 
 
@@ -241,13 +241,13 @@ public class SystemConfigController {
      */
     @RequestMapping(value = "/setMailConfig", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseInfo setMailConfig(@RequestBody(required = false) String emailConfigJson) {
+    public ResponseMsg setMailConfig(@RequestBody(required = false) String emailConfigJson) {
         String methodName = "setMailConfig";
-        ResponseInfo responseInfo = new ResponseInfo();
+        ResponseMsg responseMsg = new ResponseMsg();
         try {
             if (!PrivilegeUtil.HasSystemConfig()) {
-                responseInfo.createFailedResponse(null, "没有系统配置权限", "");
-                return responseInfo;
+                responseMsg.createFailedResponse(null, "没有系统配置权限", "");
+                return responseMsg;
             }
 
             SystemConfigEntity systemConfigEntity = systemConfigService.getSystemConfigEntity(SystemConfigType.EMAIL);
@@ -262,13 +262,13 @@ public class SystemConfigController {
                 systemConfigService.addConfig(emailConfigJson, SystemConfigType.EMAIL);
             }
 
-            responseInfo.createSuccessResponse("");
+            responseMsg.createSuccessResponse("");
         } catch (Exception e) {
-            responseInfo.createFailedResponse(null, "修改邮件通知配置异常", e.getMessage());
+            responseMsg.createFailedResponse(null, "修改邮件通知配置异常", e.getMessage());
             LoggerUtil.errorSysLog(this.getClass().getName(), methodName, "修改邮件通知配置异常," + e.getMessage());
         }
 
-        return responseInfo;
+        return responseMsg;
     }
 
     /**
@@ -278,9 +278,9 @@ public class SystemConfigController {
      */
     @RequestMapping(value = "/getMailConfig", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseInfo getMailConfig() {
+    public ResponseMsg getMailConfig() {
         String methodName = "getMailConfig";
-        ResponseInfo responseInfo = new ResponseInfo();
+        ResponseMsg responseMsg = new ResponseMsg();
         try {
             Map<String, Object> data = new HashMap<>();
 
@@ -292,8 +292,8 @@ public class SystemConfigController {
                 data.put("mailAddress", "");
                 data.put("mailPassword", "");
 
-                responseInfo.createSuccessResponse(data);
-                return responseInfo;
+                responseMsg.createSuccessResponse(data);
+                return responseMsg;
             }
 
             String config = email.getConfig();
@@ -305,13 +305,13 @@ public class SystemConfigController {
             data.put("mailPassword", "******");
 
 
-            responseInfo.createSuccessResponse(data);
+            responseMsg.createSuccessResponse(data);
         } catch (Exception e) {
-            responseInfo.createFailedResponse(null, "获取邮件通知配置异常", e.getMessage());
+            responseMsg.createFailedResponse(null, "获取邮件通知配置异常", e.getMessage());
             LoggerUtil.errorSysLog(this.getClass().getName(), methodName, "获取邮件通知配置异常," + e.getMessage());
         }
 
-        return responseInfo;
+        return responseMsg;
     }
 
     /**
@@ -321,23 +321,23 @@ public class SystemConfigController {
      */
     @RequestMapping(value = "/clearMailConfig", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseInfo clearMailConfig() {
+    public ResponseMsg clearMailConfig() {
         String methodName = "clearMailConfig";
-        ResponseInfo responseInfo = new ResponseInfo();
+        ResponseMsg responseMsg = new ResponseMsg();
         try {
             if (!PrivilegeUtil.HasSystemConfig()) {
-                responseInfo.createFailedResponse(null, "没有系统配置权限", "");
-                return responseInfo;
+                responseMsg.createFailedResponse(null, "没有系统配置权限", "");
+                return responseMsg;
             }
 
             systemConfigService.cleanConfig(SystemConfigType.EMAIL);
-            responseInfo.createSuccessResponse("success");
+            responseMsg.createSuccessResponse("success");
         } catch (Exception e) {
-            responseInfo.createFailedResponse(null, "清除邮件通知配置异常", e.getMessage());
+            responseMsg.createFailedResponse(null, "清除邮件通知配置异常", e.getMessage());
             LoggerUtil.errorSysLog(this.getClass().getName(), methodName, "清除邮件通知配置异常," + e.getMessage());
         }
 
-        return responseInfo;
+        return responseMsg;
     }
 
     private boolean checkAkForBucket(String endPoint, String bucketName, String accesskeyID, String accesskeyKey) {

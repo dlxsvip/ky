@@ -1,6 +1,6 @@
 package com.ky.logic.controller;
 
-import com.ky.logic.model.info.ResponseInfo;
+import com.ky.logic.model.info.ResponseMsg;
 import com.ky.logic.service.IUploadService;
 import com.ky.logic.utils.LoggerUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -32,24 +32,24 @@ public class FileUploadController {
      */
     @RequestMapping(value = "/upload")
     @ResponseBody
-    public ResponseInfo upload(@RequestParam("file") MultipartFile file, @RequestParam(required = false) String localDir) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseMsg upload(@RequestParam("file") MultipartFile file, @RequestParam(required = false) String localDir) {
+        ResponseMsg responseMsg = new ResponseMsg();
 
         try {
             if (StringUtils.isNotEmpty(localDir)) {
                 // 上传到本地
-                responseInfo = uploadService.upload2local(file, localDir);
+                responseMsg = uploadService.upload2local(file, localDir);
             }else{
                 // 上传到OSS
-                responseInfo = uploadService.upload2oss(file);
+                responseMsg = uploadService.upload2oss(file);
             }
         } catch (Exception e) {
-            responseInfo.createFailedResponse(null, "文件上传失败", e.getMessage());
+            responseMsg.createFailedResponse(null, "文件上传失败", e.getMessage());
             LoggerUtil.errorSysLog(this.getClass().getName(), "upload", "文件上传失败：" + e.getMessage());
         }
 
 
-        return responseInfo;
+        return responseMsg;
     }
 
 

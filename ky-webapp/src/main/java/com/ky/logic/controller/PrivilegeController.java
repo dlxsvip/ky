@@ -3,7 +3,7 @@ package com.ky.logic.controller;
 import com.ky.logic.common.init.PrivilegeConfigs;
 import com.ky.logic.entity.UserPrivilegeEntity;
 import com.ky.logic.model.Paging;
-import com.ky.logic.model.info.ResponseInfo;
+import com.ky.logic.model.info.ResponseMsg;
 import com.ky.logic.service.IPrivilegeService;
 import com.ky.logic.utils.DateUtil;
 import com.ky.logic.utils.page.Page;
@@ -29,66 +29,66 @@ public class PrivilegeController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseInfo create(@RequestBody UserPrivilegeEntity privilege) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseMsg create(@RequestBody UserPrivilegeEntity privilege) {
+        ResponseMsg responseMsg = new ResponseMsg();
         try {
             UserPrivilegeEntity privilegeEntity = privilegeService.getByPrivilege(privilege.getPrivilege());
             if (null != privilegeEntity) {
-                responseInfo.createFailedResponse(null, "此权限已存在", "添加失败");
-                return responseInfo;
+                responseMsg.createFailedResponse(null, "此权限已存在", "添加失败");
+                return responseMsg;
             }
 
             String privilegeId = privilegeService.createPrivilege(privilege);
-            responseInfo.createSuccessResponse(privilegeId);
+            responseMsg.createSuccessResponse(privilegeId);
         } catch (Exception e) {
-            responseInfo.createFailedResponse(null, "添加失败", e.getMessage());
+            responseMsg.createFailedResponse(null, "添加失败", e.getMessage());
         }
 
-        return responseInfo;
+        return responseMsg;
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseInfo update(@RequestBody UserPrivilegeEntity privilege) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseMsg update(@RequestBody UserPrivilegeEntity privilege) {
+        ResponseMsg responseMsg = new ResponseMsg();
         try {
             String privilegeId = privilegeService.updatePrivilege(privilege);
-            responseInfo.createSuccessResponse(privilegeId);
+            responseMsg.createSuccessResponse(privilegeId);
         } catch (Exception e) {
-            responseInfo.createFailedResponse(null, "修改失败", e.getMessage());
+            responseMsg.createFailedResponse(null, "修改失败", e.getMessage());
         }
 
-        return responseInfo;
+        return responseMsg;
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseInfo delete(@RequestParam String privilegeId) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseMsg delete(@RequestParam String privilegeId) {
+        ResponseMsg responseMsg = new ResponseMsg();
         try {
             privilegeService.deletePrivilege(privilegeId);
-            responseInfo.createSuccessResponse(privilegeId);
+            responseMsg.createSuccessResponse(privilegeId);
         } catch (Exception e) {
-            responseInfo.createFailedResponse(null, "删除失败", e.getMessage());
+            responseMsg.createFailedResponse(null, "删除失败", e.getMessage());
         }
 
-        return responseInfo;
+        return responseMsg;
     }
 
     @RequestMapping(value = "/queryByPage", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseInfo queryByPage(@RequestParam(required = false) String privilegeId,
-                                    @RequestParam(required = false) String privilegeName,
-                                    @RequestParam(required = false) String privilege,
-                                    @RequestParam(required = false) String description,
-                                    @RequestParam(required = false) String createTime,
-                                    @RequestParam(required = false) String updateTime,
-                                    @RequestParam(required = false) String orderBy,
-                                    @RequestParam(required = false) Boolean orderAsc,
-                                    @RequestParam(required = false) Integer pageNum,
-                                    @RequestParam(required = false) Integer pageSize) {
+    public ResponseMsg queryByPage(@RequestParam(required = false) String privilegeId,
+                                   @RequestParam(required = false) String privilegeName,
+                                   @RequestParam(required = false) String privilege,
+                                   @RequestParam(required = false) String description,
+                                   @RequestParam(required = false) String createTime,
+                                   @RequestParam(required = false) String updateTime,
+                                   @RequestParam(required = false) String orderBy,
+                                   @RequestParam(required = false) Boolean orderAsc,
+                                   @RequestParam(required = false) Integer pageNum,
+                                   @RequestParam(required = false) Integer pageSize) {
 
-        ResponseInfo responseInfo = new ResponseInfo();
+        ResponseMsg responseMsg = new ResponseMsg();
         try {
             UserPrivilegeEntity request = new UserPrivilegeEntity();
             request.setId(privilegeId);
@@ -114,37 +114,37 @@ public class PrivilegeController {
 
             Page<UserPrivilegeEntity> page = privilegeService.queryPrivilegePage(request, paging);
 
-            responseInfo.createSuccessResponse(page);
+            responseMsg.createSuccessResponse(page);
         } catch (Exception e) {
-            responseInfo.createFailedResponse(null, "查询权限列表异常", e.getMessage());
+            responseMsg.createFailedResponse(null, "查询权限列表异常", e.getMessage());
         }
 
-        return responseInfo;
+        return responseMsg;
     }
 
     @RequestMapping(value = "/query", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseInfo query(@RequestParam String privilegeId) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseMsg query(@RequestParam String privilegeId) {
+        ResponseMsg responseMsg = new ResponseMsg();
         try {
             UserPrivilegeEntity response = privilegeService.query(privilegeId);
-            responseInfo.createSuccessResponse(response);
+            responseMsg.createSuccessResponse(response);
         } catch (Exception e) {
-            responseInfo.createFailedResponse(null, "查询权限详情异常", e.getMessage());
+            responseMsg.createFailedResponse(null, "查询权限详情异常", e.getMessage());
         }
-        return responseInfo;
+        return responseMsg;
     }
 
     @RequestMapping(value = "/queryByConfig", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseInfo queryByConfig() {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseMsg queryByConfig() {
+        ResponseMsg responseMsg = new ResponseMsg();
         try {
             List<Map<String, String>> privilegeMap = PrivilegeConfigs.getPrivilegeMap();
-            responseInfo.createSuccessResponse(privilegeMap);
+            responseMsg.createSuccessResponse(privilegeMap);
         } catch (Exception e) {
-            responseInfo.createFailedResponse(null, "查询权限配置文件异常", e.getMessage());
+            responseMsg.createFailedResponse(null, "查询权限配置文件异常", e.getMessage());
         }
-        return responseInfo;
+        return responseMsg;
     }
 }

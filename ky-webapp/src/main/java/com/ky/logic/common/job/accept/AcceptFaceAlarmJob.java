@@ -7,7 +7,7 @@ import com.ky.logic.model.response.KeyPersonInfoResponse;
 import com.ky.logic.utils.JacksonUtil;
 import com.ky.logic.utils.LoggerUtil;
 import com.ky.logic.utils.SpringContextUtil;
-import com.ky.pm.model.FaceAlarmMsgModel;
+import com.ky.pm.model.FaceMsgModel;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,13 +17,13 @@ import java.util.Map;
  */
 public class AcceptFaceAlarmJob implements Runnable {
 
-    private FaceAlarmMsgModel faceAlarm;
+    private FaceMsgModel faceAlarm;
 
     private IKeyPersonInfoService keyPersonInfoService;
 
     private IKeyPersonAnalysisService keyPersonAnalysisService;
 
-    public AcceptFaceAlarmJob(FaceAlarmMsgModel faceAlarm) {
+    public AcceptFaceAlarmJob(FaceMsgModel faceAlarm) {
         this.faceAlarm = faceAlarm;
     }
 

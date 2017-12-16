@@ -4,7 +4,7 @@ import com.ky.logic.entity.UserEntity;
 import com.ky.logic.entity.UserPrivilegeEntity;
 import com.ky.logic.entity.UserRoleEntity;
 import com.ky.logic.model.Paging;
-import com.ky.logic.model.info.ResponseInfo;
+import com.ky.logic.model.info.ResponseMsg;
 import com.ky.logic.model.request.UserRequest;
 import com.ky.logic.model.response.UserResponse;
 import com.ky.logic.service.IUserService;
@@ -39,77 +39,77 @@ public class UserController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseInfo create(@RequestBody UserRequest user) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseMsg create(@RequestBody UserRequest user) {
+        ResponseMsg responseMsg = new ResponseMsg();
         String userId = null;
         try {
             if (!PrivilegeUtil.HasUserConfig()) {
-                responseInfo.createFailedResponse(null, "没有用户管理权限", "");
-                return responseInfo;
+                responseMsg.createFailedResponse(null, "没有用户管理权限", "");
+                return responseMsg;
             }
 
             UserEntity userEntity = userService.queryByName(user.getLoginName());
             if (null != userEntity) {
-                responseInfo.createFailedResponse(null, "存在相同登录名的用户", "添加失败");
-                return responseInfo;
+                responseMsg.createFailedResponse(null, "存在相同登录名的用户", "添加失败");
+                return responseMsg;
             }
 
             userId = userService.createUser(user);
-            responseInfo.createSuccessResponse(userId);
+            responseMsg.createSuccessResponse(userId);
         } catch (Exception e) {
-            responseInfo.createFailedResponse(null, "添加失败", e.getMessage());
+            responseMsg.createFailedResponse(null, "添加失败", e.getMessage());
         }
 
-        return responseInfo;
+        return responseMsg;
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseInfo update(@RequestBody UserRequest user) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseMsg update(@RequestBody UserRequest user) {
+        ResponseMsg responseMsg = new ResponseMsg();
         try {
             String userId = userService.updateUser(user);
-            responseInfo.createSuccessResponse(userId);
+            responseMsg.createSuccessResponse(userId);
         } catch (Exception e) {
-            responseInfo.createFailedResponse(null, "修改失败", e.getMessage());
+            responseMsg.createFailedResponse(null, "修改失败", e.getMessage());
         }
 
-        return responseInfo;
+        return responseMsg;
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseInfo delete(@RequestParam String userId) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseMsg delete(@RequestParam String userId) {
+        ResponseMsg responseMsg = new ResponseMsg();
         try {
             if (!PrivilegeUtil.HasUserConfig()) {
-                responseInfo.createFailedResponse(null, "没有用户管理权限", "");
-                return responseInfo;
+                responseMsg.createFailedResponse(null, "没有用户管理权限", "");
+                return responseMsg;
             }
 
             userService.deleteUser(userId);
-            responseInfo.createSuccessResponse(userId);
+            responseMsg.createSuccessResponse(userId);
         } catch (Exception e) {
-            responseInfo.createFailedResponse(null, "删除失败", e.getMessage());
+            responseMsg.createFailedResponse(null, "删除失败", e.getMessage());
         }
 
-        return responseInfo;
+        return responseMsg;
     }
 
     @RequestMapping(value = "/queryByPage", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseInfo queryByPage(@RequestParam(required = false) String userId,
-                                    @RequestParam(required = false) String loginName,
-                                    @RequestParam(required = false) String realName,
-                                    @RequestParam(required = false) String cellphoneNum,
-                                    @RequestParam(required = false) String telephoneNum,
-                                    @RequestParam(required = false) String email,
-                                    @RequestParam(required = false) String orderBy,
-                                    @RequestParam(required = false) Boolean orderAsc,
-                                    @RequestParam(required = false) Integer pageNum,
-                                    @RequestParam(required = false) Integer pageSize) {
+    public ResponseMsg queryByPage(@RequestParam(required = false) String userId,
+                                   @RequestParam(required = false) String loginName,
+                                   @RequestParam(required = false) String realName,
+                                   @RequestParam(required = false) String cellphoneNum,
+                                   @RequestParam(required = false) String telephoneNum,
+                                   @RequestParam(required = false) String email,
+                                   @RequestParam(required = false) String orderBy,
+                                   @RequestParam(required = false) Boolean orderAsc,
+                                   @RequestParam(required = false) Integer pageNum,
+                                   @RequestParam(required = false) Integer pageSize) {
 
-        ResponseInfo responseInfo = new ResponseInfo();
+        ResponseMsg responseMsg = new ResponseMsg();
         try {
             UserRequest request = new UserRequest();
             request.setUserId(userId);
@@ -124,8 +124,8 @@ public class UserController {
             request.setPageSize(pageSize);
 
             if (!PrivilegeUtil.HasUserConfig()) {
-                responseInfo.createFailedResponse(null, "没有用户管理权限", "");
-                return responseInfo;
+                responseMsg.createFailedResponse(null, "没有用户管理权限", "");
+                return responseMsg;
             }
 
             UserEntity curLoginUser = userService.getCurLoginUser();
@@ -137,25 +137,25 @@ public class UserController {
 
             Page<UserResponse> page = userService.queryByPage(request);
 
-            responseInfo.createSuccessResponse(page);
+            responseMsg.createSuccessResponse(page);
         } catch (Exception e) {
-            responseInfo.createFailedResponse(null, "查询用户信息列表异常", e.getMessage());
+            responseMsg.createFailedResponse(null, "查询用户信息列表异常", e.getMessage());
         }
 
-        return responseInfo;
+        return responseMsg;
     }
 
     @RequestMapping(value = "/query", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseInfo query(@RequestParam String userId) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseMsg query(@RequestParam String userId) {
+        ResponseMsg responseMsg = new ResponseMsg();
         try {
             UserResponse response = userService.queryInfo(userId);
-            responseInfo.createSuccessResponse(response);
+            responseMsg.createSuccessResponse(response);
         } catch (Exception e) {
-            responseInfo.createFailedResponse(null, "查询用户详情异常", e.getMessage());
+            responseMsg.createFailedResponse(null, "查询用户详情异常", e.getMessage());
         }
-        return responseInfo;
+        return responseMsg;
     }
 
 
@@ -207,32 +207,32 @@ public class UserController {
      */
     @RequestMapping(value = "/checkPassword", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseInfo checkPassword(@RequestParam String currentPassword) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseMsg checkPassword(@RequestParam String currentPassword) {
+        ResponseMsg responseMsg = new ResponseMsg();
         try {
             UserEntity curLoginUser = userService.getCurLoginUser();
             if (null == curLoginUser) {
-                responseInfo.createFailedResponse(null, "用户不存在", "请检查");
-                return responseInfo;
+                responseMsg.createFailedResponse(null, "用户不存在", "请检查");
+                return responseMsg;
             }
 
             currentPassword = AesUtil.INSTANCE.decrypt(currentPassword);
             if (StringUtils.isEmpty(currentPassword)) {
-                responseInfo.createFailedResponse(null, "当前密码不能为空", "请检查");
-                return responseInfo;
+                responseMsg.createFailedResponse(null, "当前密码不能为空", "请检查");
+                return responseMsg;
             }
 
             Boolean b = BCryptUtil.checkPassword(currentPassword, curLoginUser.getPassword());
             if (b) {
-                responseInfo.createSuccessResponse("success");
+                responseMsg.createSuccessResponse("success");
             } else {
-                responseInfo.createFailedResponse(null, "密码校验失败", "currentPassword");
+                responseMsg.createFailedResponse(null, "密码校验失败", "currentPassword");
             }
         } catch (Exception e) {
-            responseInfo.createFailedResponse(null, "密码校验异常", e.getMessage());
+            responseMsg.createFailedResponse(null, "密码校验异常", e.getMessage());
         }
 
-        return responseInfo;
+        return responseMsg;
     }
 
 
@@ -244,21 +244,21 @@ public class UserController {
      */
     @RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseInfo resetPassword(@RequestBody Map<String, String> map) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseMsg resetPassword(@RequestBody Map<String, String> map) {
+        ResponseMsg responseMsg = new ResponseMsg();
         try {
             String userId = map.get("userId");
             String newPassword = map.get("newPassword");
 
             UserEntity user = userService.queryByUserId(userId);
             if (null == user) {
-                responseInfo.createFailedResponse(null, "用户不存在", "请检查id:" + userId);
-                return responseInfo;
+                responseMsg.createFailedResponse(null, "用户不存在", "请检查id:" + userId);
+                return responseMsg;
             }
 
             if (!PrivilegeUtil.HasUserConfig()) {
-                responseInfo.createFailedResponse(null, "没有用户管理权限", "");
-                return responseInfo;
+                responseMsg.createFailedResponse(null, "没有用户管理权限", "");
+                return responseMsg;
             }
 
             newPassword = AesUtil.INSTANCE.decrypt(newPassword);
@@ -270,12 +270,12 @@ public class UserController {
             // 管理员 重置密码
             String msg = userService.resetPassword(user, newPassword);
 
-            responseInfo.createSuccessResponse(msg);
+            responseMsg.createSuccessResponse(msg);
         } catch (Exception e) {
-            responseInfo.createFailedResponse(null, "修改失败", e.getMessage());
+            responseMsg.createFailedResponse(null, "修改失败", e.getMessage());
         }
 
-        return responseInfo;
+        return responseMsg;
     }
 
     /**
@@ -286,43 +286,43 @@ public class UserController {
      */
     @RequestMapping(value = "/updatePassword", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseInfo updatePassword(@RequestBody Map<String, String> map) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseMsg updatePassword(@RequestBody Map<String, String> map) {
+        ResponseMsg responseMsg = new ResponseMsg();
         try {
             String oldPassword = map.get("oldPassword");
             String newPassword = map.get("newPassword");
 
             oldPassword = AesUtil.INSTANCE.decrypt(oldPassword);
             if (StringUtils.isEmpty(oldPassword)) {
-                responseInfo.createFailedResponse(null, "当前密码不能为空", "请检查");
-                return responseInfo;
+                responseMsg.createFailedResponse(null, "当前密码不能为空", "请检查");
+                return responseMsg;
             }
 
             newPassword = AesUtil.INSTANCE.decrypt(newPassword);
             if (StringUtils.isEmpty(newPassword)) {
-                responseInfo.createFailedResponse(null, "新密码不能为空", "请检查");
-                return responseInfo;
+                responseMsg.createFailedResponse(null, "新密码不能为空", "请检查");
+                return responseMsg;
             }
 
             UserEntity user = userService.getCurLoginUser();
             if (null == user) {
-                responseInfo.createFailedResponse(null, "用户不存在", "请检查");
-                return responseInfo;
+                responseMsg.createFailedResponse(null, "用户不存在", "请检查");
+                return responseMsg;
             }
 
             // 普通用户 校验
             Boolean b = BCryptUtil.checkPassword(oldPassword, user.getPassword());
             if (b) {
                 String msg = userService.updatePassword(user, newPassword);
-                responseInfo.createSuccessResponse(msg);
+                responseMsg.createSuccessResponse(msg);
             } else {
-                responseInfo.createFailedResponse(null, "当前密码校验失败", "当前密码校验失败");
+                responseMsg.createFailedResponse(null, "当前密码校验失败", "当前密码校验失败");
             }
         } catch (Exception e) {
-            responseInfo.createFailedResponse(null, "修改失败", e.getMessage());
+            responseMsg.createFailedResponse(null, "修改失败", e.getMessage());
         }
 
-        return responseInfo;
+        return responseMsg;
     }
 
 
@@ -365,13 +365,13 @@ public class UserController {
 
     @RequestMapping(value = "/queryUsersByRoleId", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseInfo queryUsersByRoleId(@RequestParam(required = false) String roleId,
-                                           @RequestParam(required = false) String orderBy,
-                                           @RequestParam(required = false) Boolean orderAsc,
-                                           @RequestParam(required = false) Integer pageNum,
-                                           @RequestParam(required = false) Integer pageSize) {
+    public ResponseMsg queryUsersByRoleId(@RequestParam(required = false) String roleId,
+                                          @RequestParam(required = false) String orderBy,
+                                          @RequestParam(required = false) Boolean orderAsc,
+                                          @RequestParam(required = false) Integer pageNum,
+                                          @RequestParam(required = false) Integer pageSize) {
 
-        ResponseInfo responseInfo = new ResponseInfo();
+        ResponseMsg responseMsg = new ResponseMsg();
         try {
             Paging paging = new Paging();
             paging.setOrderBy(orderBy);
@@ -381,13 +381,13 @@ public class UserController {
 
             Page<UserResponse> page = userService.queryUsersByRoleId(roleId, paging);
 
-            responseInfo.createSuccessResponse(page);
+            responseMsg.createSuccessResponse(page);
         } catch (Exception e) {
             e.printStackTrace();
-            responseInfo.createFailedResponse(null, "根据角色查询用户异常", e.getMessage());
+            responseMsg.createFailedResponse(null, "根据角色查询用户异常", e.getMessage());
         }
 
-        return responseInfo;
+        return responseMsg;
     }
 
 
@@ -399,21 +399,21 @@ public class UserController {
      */
     @RequestMapping(value = "/closeForbidTime", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseInfo closeForbidTime(@RequestParam String userId) {
-        ResponseInfo responseInfo = new ResponseInfo();
+    public ResponseMsg closeForbidTime(@RequestParam String userId) {
+        ResponseMsg responseMsg = new ResponseMsg();
         try {
             if (!PrivilegeUtil.HasUserConfig()) {
-                responseInfo.createFailedResponse(null, "没有用户管理权限", "");
-                return responseInfo;
+                responseMsg.createFailedResponse(null, "没有用户管理权限", "");
+                return responseMsg;
             }
 
 
             userService.closeForbidTime(userId);
-            responseInfo.createSuccessResponse(userId);
+            responseMsg.createSuccessResponse(userId);
         } catch (Exception e) {
-            responseInfo.createFailedResponse(null, "删除失败", e.getMessage());
+            responseMsg.createFailedResponse(null, "删除失败", e.getMessage());
         }
 
-        return responseInfo;
+        return responseMsg;
     }
 }

@@ -1,20 +1,19 @@
-package com.ky.logic.model.info;
+package com.ky.pm.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ResponseInfo {
+public class ResponseMsg {
     public static final String SUCCESS = "success";
     public static final String FAILED = "failed";
     private String result;
-    /*此字段预留，后面增加二级错误码*/
     private String responseCode;
     private Object data;
     private String errorMsg;
     private String errorDetail;
 
-    public ResponseInfo(String responseCode, String result, Object data, String errorMsg, String errorDetail) {
+    public ResponseMsg(String responseCode, String result, Object data, String errorMsg, String errorDetail) {
         this.responseCode = responseCode;
         this.result = result;
         this.data = data;
@@ -22,7 +21,7 @@ public class ResponseInfo {
         this.errorDetail = errorDetail;
     }
 
-    public ResponseInfo() {
+    public ResponseMsg() {
     }
 
     public String getResult() {

@@ -2,9 +2,9 @@ package com.ky.sdk.http.client;
 
 
 import com.ky.sdk.http.service.LiveBroadcastService;
-import com.ky.pm.model.FaceAlarmMsgModel;
-import com.ky.pm.model.KeywordAlarmMsgModel;
-import com.ky.pm.model.ResponseInfo;
+import com.ky.pm.model.FaceMsgModel;
+import com.ky.pm.model.WordMsgModel;
+import com.ky.pm.model.ResponseMsg;
 
 /**
  * Created by yl on 2017/7/20.
@@ -33,7 +33,7 @@ public class ManageClient {
      * @param keyWordAlarm 告警信息
      * @return responseInfo
      */
-    public ResponseInfo keywordAlarmSend(KeywordAlarmMsgModel keyWordAlarm) {
+    public ResponseMsg keywordAlarmSend(WordMsgModel keyWordAlarm) {
         return liveBroadcastService.keywordAlarmSend(keyWordAlarm);
     }
 
@@ -44,7 +44,7 @@ public class ManageClient {
      * @param faceAlarm 告警信息
      * @return responseInfo
      */
-    public ResponseInfo faceAlarmSend(FaceAlarmMsgModel faceAlarm) {
+    public ResponseMsg faceAlarmSend(FaceMsgModel faceAlarm) {
         return liveBroadcastService.faceAlarmSend(faceAlarm);
     }
 

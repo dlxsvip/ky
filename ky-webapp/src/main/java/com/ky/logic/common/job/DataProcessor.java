@@ -4,8 +4,8 @@ import com.ky.logic.common.job.accept.AcceptFaceAlarmJob;
 import com.ky.logic.common.job.accept.AcceptKeywordAlarmJob;
 import com.ky.logic.common.pool.AcceptPool;
 import com.ky.logic.utils.JacksonUtil;
-import com.ky.pm.model.FaceAlarmMsgModel;
-import com.ky.pm.model.KeywordAlarmMsgModel;
+import com.ky.pm.model.FaceMsgModel;
+import com.ky.pm.model.WordMsgModel;
 import com.ky.pm.type.MethodType;
 
 import java.io.DataInputStream;
@@ -36,12 +36,12 @@ public class DataProcessor implements Runnable {
             String jsonData = readFixString(in, len);
 
             if (MethodType.KEYWORD_ALARM.equals(methodType)) {
-                KeywordAlarmMsgModel keyWordAlarm = JacksonUtil.json2bean(jsonData, KeywordAlarmMsgModel.class);
+                WordMsgModel keyWordAlarm = JacksonUtil.json2bean(jsonData, WordMsgModel.class);
 
                 // 放入接收缓冲池 待处理
                 AcceptPool.INSTANCE.addJob(new AcceptKeywordAlarmJob(keyWordAlarm));
             } else if (MethodType.FACE_ALARM.equals(methodType)) {
-                FaceAlarmMsgModel faceAlarm = JacksonUtil.json2bean(jsonData, FaceAlarmMsgModel.class);
+                FaceMsgModel faceAlarm = JacksonUtil.json2bean(jsonData, FaceMsgModel.class);
 
                 // 放入接收缓冲池 待处理
                 AcceptPool.INSTANCE.addJob(new AcceptFaceAlarmJob(faceAlarm));

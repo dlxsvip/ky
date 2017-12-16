@@ -6,7 +6,7 @@ import com.ky.logic.model.AnalysisInfoModel;
 import com.ky.logic.utils.JacksonUtil;
 import com.ky.logic.utils.LoggerUtil;
 import com.ky.logic.utils.SpringContextUtil;
-import com.ky.pm.model.KeywordAlarmMsgModel;
+import com.ky.pm.model.WordMsgModel;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,11 +16,11 @@ import java.util.Map;
  */
 public class AcceptKeywordAlarmJob implements Runnable{
 
-    private KeywordAlarmMsgModel keyWordAlarm;
+    private WordMsgModel keyWordAlarm;
 
     private IKeywordAnalysisService keywordAnalysisService;
 
-    public AcceptKeywordAlarmJob(KeywordAlarmMsgModel keyWordAlarm) {
+    public AcceptKeywordAlarmJob(WordMsgModel keyWordAlarm) {
         this.keyWordAlarm = keyWordAlarm;
     }
 

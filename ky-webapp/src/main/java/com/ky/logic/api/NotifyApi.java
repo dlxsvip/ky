@@ -6,8 +6,8 @@ import com.ky.logic.common.job.accept.AcceptKeywordAlarmJob;
 import com.ky.logic.common.pool.AcceptPool;
 import com.ky.logic.utils.JacksonUtil;
 import com.ky.logic.utils.LoggerUtil;
-import com.ky.pm.model.FaceAlarmMsgModel;
-import com.ky.pm.model.KeywordAlarmMsgModel;
+import com.ky.pm.model.FaceMsgModel;
+import com.ky.pm.model.WordMsgModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +32,7 @@ public class NotifyApi {
      */
     @RequestMapping(value = "/keyWordAlarm", method = RequestMethod.POST)
     @ResponseBody
-    public String keyWordAlarm(@RequestBody KeywordAlarmMsgModel keyWordAlarm) {
+    public String keyWordAlarm(@RequestBody WordMsgModel keyWordAlarm) {
         LoggerUtil.debugSysLog(this.getClass().getName(), "keyWordAlarm", "---------接收关键词识别数据成功--------");
 
         // 放入接收缓冲池 待处理
@@ -49,7 +49,7 @@ public class NotifyApi {
      */
     @RequestMapping(value = "/faceAlarm", method = RequestMethod.POST)
     @ResponseBody           // @ModelAttribute 接收 url 参数
-    public String faceAlarm(@RequestBody FaceAlarmMsgModel faceAlarm) {
+    public String faceAlarm(@RequestBody FaceMsgModel faceAlarm) {
         LoggerUtil.debugSysLog(this.getClass().getName(), "faceAlarm", "---------接收人脸识别数据成功--------");
         LoggerUtil.debugSysLog(this.getClass().getName(), "faceAlarm", JacksonUtil.obj2JsonBySafe(faceAlarm));
 
