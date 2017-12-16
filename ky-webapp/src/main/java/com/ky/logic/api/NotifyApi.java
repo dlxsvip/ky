@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping("/channelNotify")
-public class ChannelNotifyApi {
+public class NotifyApi {
 
 
 

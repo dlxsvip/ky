@@ -4,8 +4,6 @@ import com.ky.logic.common.job.send.SendFaceAlarmJob;
 import com.ky.logic.common.pool.SendPool;
 import com.ky.logic.model.AnalysisInfoModel;
 import com.ky.logic.model.response.KeyPersonInfoResponse;
-import com.ky.logic.service.IKeyPersonAnalysisService;
-import com.ky.logic.service.IKeyPersonInfoService;
 import com.ky.logic.utils.JacksonUtil;
 import com.ky.logic.utils.LoggerUtil;
 import com.ky.logic.utils.SpringContextUtil;

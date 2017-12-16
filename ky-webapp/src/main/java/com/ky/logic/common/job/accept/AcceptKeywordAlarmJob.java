@@ -3,7 +3,6 @@ package com.ky.logic.common.job.accept;
 import com.ky.logic.common.job.send.SendKeywordAlarmJob;
 import com.ky.logic.common.pool.SendPool;
 import com.ky.logic.model.AnalysisInfoModel;
-import com.ky.logic.service.IKeywordAnalysisService;
 import com.ky.logic.utils.JacksonUtil;
 import com.ky.logic.utils.LoggerUtil;
 import com.ky.logic.utils.SpringContextUtil;

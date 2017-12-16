@@ -1,7 +1,6 @@
 package com.ky.logic.common.job.send;
 
 import com.ky.logic.model.FaceDiscernModel;
-import com.ky.logic.service.IKeyPersonInfoService;
 import com.ky.logic.service.IUploadService;
 import com.ky.logic.utils.JacksonUtil;
 import com.ky.logic.utils.LoggerUtil;
